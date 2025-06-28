@@ -319,5 +319,26 @@
       <a href="#" class="text-white">Instagram</a>
     </p>
   </footer>
+
+<script>
+  function showSection(id) {
+    document.querySelectorAll('.section-content').forEach(section => section.classList.remove('active-section'));
+    document.getElementById(id).classList.add('active-section');
+  }
+
+  // Prevent login form from submitting and reload
+  document.getElementById("login-form").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+    if (email && password) {
+      alert("Login successful (dummy response)");
+      // In a real system, replace with backend request here
+    } else {
+      alert("Please enter both email and password.");
+    }
+  });
+</script>
+
 </body>
 </html>
