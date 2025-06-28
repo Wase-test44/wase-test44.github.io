@@ -138,180 +138,176 @@
       </ol>
     </section>
 
-    <section id="login" class="section-content">
-      <div class="container">
-        <h3 class="text-center">Member Login</h3>
-        <form id="login-form">
-          <div class="mb-3">
-            <label for="email" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="email" required>
-          </div>
-          <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" required>
-          </div>
-          <div class="text-center">
-            <button type="submit" class="btn btn-primary">Login</button>
-          </div>
-          <div class="form-links text-center">
-            <a href="#" onclick="showSection('forgot-password')">Forgot Password?</a> |
-            <a href="#" onclick="showSection('signup')">Sign Up</a>
-          </div>
-        </form>
+<!-- Login, Forgot Password, Signup sections inserted here -->
+<section id="login" class="section-content">
+  <div class="container">
+    <h3 class="text-center">Member Login</h3>
+    <form id="login-form">
+      <div class="mb-3">
+        <label for="email" class="form-label">Email address</label>
+        <input type="email" class="form-control" id="email" required>
       </div>
-    </section>
-
-    <section id="forgot-password" class="section-content">
-      <div class="container">
-        <h3 class="text-center">Password Recovery</h3>
-        <form>
-          <div class="mb-3">
-            <label for="recoveryEmail" class="form-label">Enter your registered email</label>
-            <input type="email" class="form-control" id="recoveryEmail" placeholder="you@example.com" required>
-          </div>
-          <div class="text-center">
-            <button type="submit" class="btn btn-warning">Send Recovery Link</button>
-          </div>
-          <div class="form-links text-center mt-3">
-            <a href="#" onclick="showSection('login')">Back to Login</a>
-          </div>
-        </form>
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" class="form-control" id="password" required>
       </div>
-    </section>
-
-    <section id="signup" class="section-content">
-      <div class="container">
-        <h3 class="text-center">Member Sign Up</h3>
-        <form>
-          <div class="mb-3">
-            <label class="form-label">Surname</label>
-            <input type="text" class="form-control" required>
-          </div>
-          <div class="mb-3">
-            <label class="form-label">First Name</label>
-            <input type="text" class="form-control" required>
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Other Name</label>
-            <input type="text" class="form-control">
-          </div>
-          <div class="row mb-3">
-            <div class="col">
-              <label class="form-label">Date of Birth</label>
-              <input type="date" class="form-control" required>
-            </div>
-            <div class="col">
-              <label class="form-label">Gender</label>
-              <select class="form-control" required>
-                <option value="">Select Gender</option>
-                <option>Male</option>
-                <option>Female</option>
-                <option>Other</option>
-              </select>
-            </div>
-          </div>
-          <div class="row mb-3">
-            <div class="col">
-              <label class="form-label">Phone Number</label>
-              <input type="tel" class="form-control" required>
-            </div>
-            <div class="col">
-              <label class="form-label">Email</label>
-              <input type="email" class="form-control" required>
-            </div>
-          </div>
-
-<div class="row mb-3">
-  <div class="col">
-    <label class="form-label">State of Origin</label>
-    <select class="form-control" id="stateOfOrigin" required>
-      <option value="">Select State</option>
-      <option>Adamawa</option>
-      <option>Bauchi</option>
-      <option>Benue</option>
-      <option>Borno</option>
-      <option>Gombe</option>
-      <option>Jigawa</option>
-      <option>Kaduna</option>
-      <option>Kano</option>
-      <option>Katsina</option>
-      <option>Kebbi</option>
-      <option>Kogi</option>
-      <option>Kwara</option>
-      <option>Nasarawa</option>
-      <option>Niger</option>
-      <option>Plateau</option>
-      <option>Sokoto</option>
-      <option>Taraba</option>
-      <option>Yobe</option>
-      <option>Zamfara</option>
-      <option>FCT</option>
-    </select>
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary">Login</button>
+      </div>
+      <div class="form-links text-center">
+        <a href="#" onclick="showSection('forgot-password')">Forgot Password?</a> |
+        <a href="#" onclick="showSection('signup')">Sign Up</a>
+      </div>
+    </form>
   </div>
-  <div class="col">
-    <label class="form-label">LGA of Origin</label>
-    <select class="form-control" id="lgaOfOrigin" required>
-      <option value="">Select LGA</option>
-    </select>
-  </div>
-</div>
+</section>
 
-          
-           
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Residential Address</label>
-            <input type="text" class="form-control" required>
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Educational Qualification</label>
-            <input type="text" class="form-control">
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Occupation</label>
-            <input type="text" class="form-control">
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Preferred Role/Department</label>
-            <select class="form-control">
-              <option value="">Select area of interest</option>
-              <option>Environmental Protection</option>
-              <option>Research & Planning</option>
-              <option>Public Affairs</option>
-              <option>Culture & Tourism</option>
-              <option>Finance</option>
-              <option>Peace Building</option>
-              <option>ICT / Digital Media</option>
-              <option>Youth Engagement</option>
-            </select>
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Passport Photo</label>
-            <input type="file" class="form-control" accept="image/*" required>
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Upload ID Card (Optional)</label>
-            <input type="file" class="form-control" accept="image/*">
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Official Access Code</label>
-            <input type="password" class="form-control" id="accessCode" required>
-          </div>
-          <div class="mb-3 form-check">
-            <input type="checkbox" class="form-check-input" id="agreement" required>
-            <label class="form-check-label" for="agreement">I agree to uphold the values of AREWA Progressive Eagle Movement.</label>
-          </div>
-          <div class="text-center">
-            <button type="submit" class="btn btn-success">Sign Up</button>
-          </div>
-          <div class="form-links text-center mt-3">
-            <a href="#" onclick="showSection('login')">Already registered? Login</a>
-          </div>
-        </form>
+<section id="forgot-password" class="section-content">
+  <div class="container">
+    <h3 class="text-center">Password Recovery</h3>
+    <form>
+      <div class="mb-3">
+        <label for="recoveryEmail" class="form-label">Enter your registered email</label>
+        <input type="email" class="form-control" id="recoveryEmail" placeholder="you@example.com" required>
       </div>
-    </section>
+      <div class="text-center">
+        <button type="submit" class="btn btn-warning">Send Recovery Link</button>
+      </div>
+      <div class="form-links text-center mt-3">
+        <a href="#" onclick="showSection('login')">Back to Login</a>
+      </div>
+    </form>
+  </div>
+</section>
+
+<section id="signup" class="section-content">
+  <div class="container">
+    <h3 class="text-center">Member Sign Up</h3>
+    <form>
+      <div class="mb-3">
+        <label class="form-label">Surname</label>
+        <input type="text" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">First Name</label>
+        <input type="text" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Other Name</label>
+        <input type="text" class="form-control">
+      </div>
+      <div class="row mb-3">
+        <div class="col">
+          <label class="form-label">Date of Birth</label>
+          <input type="date" class="form-control" required>
+        </div>
+        <div class="col">
+          <label class="form-label">Gender</label>
+          <select class="form-control" required>
+            <option value="">Select Gender</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col">
+          <label class="form-label">Phone Number</label>
+          <input type="tel" class="form-control" required>
+        </div>
+        <div class="col">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-control" required>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col">
+          <label class="form-label">State of Origin</label>
+          <select class="form-control" id="stateOfOrigin" required>
+            <option value="">Select State</option>
+            <option>Adamawa</option>
+            <option>Bauchi</option>
+            <option>Benue</option>
+            <option>Borno</option>
+            <option>Gombe</option>
+            <option>Jigawa</option>
+            <option>Kaduna</option>
+            <option>Kano</option>
+            <option>Katsina</option>
+            <option>Kebbi</option>
+            <option>Kogi</option>
+            <option>Kwara</option>
+            <option>Nasarawa</option>
+            <option>Niger</option>
+            <option>Plateau</option>
+            <option>Sokoto</option>
+            <option>Taraba</option>
+            <option>Yobe</option>
+            <option>Zamfara</option>
+            <option>FCT</option>
+          </select>
+        </div>
+        <div class="col">
+          <label class="form-label">LGA of Origin</label>
+          <select class="form-control" id="lgaOfOrigin" required>
+            <option value="">Select LGA</option>
+          </select>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Residential Address</label>
+        <input type="text" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Educational Qualification</label>
+        <input type="text" class="form-control">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Occupation</label>
+        <input type="text" class="form-control">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Preferred Role/Department</label>
+        <select class="form-control">
+          <option value="">Select area of interest</option>
+          <option>Environmental Protection</option>
+          <option>Research & Planning</option>
+          <option>Public Affairs</option>
+          <option>Culture & Tourism</option>
+          <option>Finance</option>
+          <option>Peace Building</option>
+          <option>ICT / Digital Media</option>
+          <option>Youth Engagement</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Passport Photo</label>
+        <input type="file" class="form-control" accept="image/*" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Upload ID Card (Optional)</label>
+        <input type="file" class="form-control" accept="image/*">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Official Access Code</label>
+        <input type="password" class="form-control" id="accessCode" required>
+      </div>
+      <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" id="agreement" required>
+        <label class="form-check-label" for="agreement">I agree to uphold the values of AREWA Progressive Eagle Movement.</label>
+      </div>
+      <div class="text-center">
+        <button type="submit" class="btn btn-success">Sign Up</button>
+      </div>
+      <div class="form-links text-center mt-3">
+        <a href="#" onclick="showSection('login')">Already registered? Login</a>
+      </div>
+    </form>
+  </div>
+</section>
+
   </main>
-
   <footer>
     <p class="mb-0">
       &copy; 2025 AREWA Progressive Eagle Movement. All rights reserved. |
@@ -323,161 +319,5 @@
       <a href="#" class="text-white">Instagram</a>
     </p>
   </footer>
-
-  <script>
-    function showSection(id) {
-      document.querySelectorAll('.section-content').forEach(section => section.classList.remove('active-section'));
-      const active = document.getElementById(id);
-      if (active) active.classList.add('active-section');
-    }
-
-    document.addEventListener('DOMContentLoaded', function () {
-      const loginForm = document.getElementById('login-form');
-      const authButtons = document.getElementById('auth-buttons');
-      const signupForm = document.querySelector('#signup form');
-
-      loginForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-        authButtons.innerHTML = `
-          <button class="btn btn-outline-warning ms-2" onclick="logout()">Log Out</button>
-        `;
-        showSection('hero');
-      });
-
-      // Sign-up access restriction logic
-      signupForm.addEventListener('submit', function (e) {
-        const accessCode = document.getElementById('accessCode').value.trim();
-        const expectedCode = 'APEM2025';
-
-        if (accessCode !== expectedCode) {
-          e.preventDefault();
-          alert('Invalid access code. Only authorized officials can sign up.');
-        }
-      });
-    });
-
-    function logout() {
-      const authButtons = document.getElementById('auth-buttons');
-      authButtons.innerHTML = `
-        <a href="#login" class="btn btn-outline-light ms-2" onclick="showSection('login')">Login</a>
-      `;
-      showSection('hero');
-    }
-  </script>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-<script type="module">
-  // Firebase SDKs
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
-  import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
-  import { getFirestore, collection, addDoc, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
-
-  // Your Firebase config
-  const firebaseConfig = {
-    apiKey: "AIzaSyDWNLns4skz3zOyvYxIssiR0B3QSGN1li8",
-    authDomain: "arewa-progressive-eagle.firebaseapp.com",
-    projectId: "arewa-progressive-eagle",
-    storageBucket: "arewa-progressive-eagle.firebasestorage.app",
-    messagingSenderId: "1002389077766",
-    appId: "1:1002389077766:web:9af458f75b345588dea887"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const db = getFirestore(app);
-
-  // 🔒 LOGIN: Handle member login
-  document.getElementById("login-form")?.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const email = document.getElementById("email").value.trim();
-    const password = document.getElementById("password").value;
-
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-      alert("Login successful");
-      showSection("hero");
-      document.getElementById("auth-buttons").innerHTML = `
-        <button class="btn btn-outline-warning ms-2" onclick="logout()">Log Out</button>
-      `;
-    } catch (error) {
-      alert("Login failed: " + error.message);
-    }
-  });
-
-  // 📝 REPORT FORM (Optional – hook up when you add this section)
-  document.getElementById("report-form")?.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const name = e.target.elements[0].value;
-    const role = e.target.elements[1].value;
-    const week = e.target.elements[2].value;
-    const report = e.target.elements[3].value;
-
-    try {
-      await addDoc(collection(db, "weekly_reports"), {
-        name,
-        role,
-        week,
-        report,
-        timestamp: new Date()
-      });
-      alert("Report submitted successfully!");
-      e.target.reset();
-    } catch (err) {
-      alert("Error submitting report: " + err.message);
-    }
-  });
-
-  // 🔓 LOGOUT function
-  window.logout = async function () {
-    await signOut(auth);
-    alert("Logged out");
-    showSection("hero");
-    document.getElementById("auth-buttons").innerHTML = `
-      <a href="#login" class="btn btn-outline-light ms-2" onclick="showSection('login')">Login</a>
-    `;
-  };
-</script>
-
-<script>
-  const lgaData = {
-    "Adamawa": ["Demsa", "Fufore", "Ganye", "Girei", "Guyuk", "Hong", "Jada", "Lamurde", "Madagali", "Maiha", "Mayo-Belwa", "Michika", "Mubi North", "Mubi South", "Numan", "Shelleng", "Song", "Toungo", "Yola North", "Yola South"],
-    "Bauchi": ["Alkaleri", "Bauchi", "Bogoro", "Damban", "Darazo", "Dass", "Gamawa", "Ganjuwa", "Giade", "Itas/Gadau", "Jama'are", "Katagum", "Kirfi", "Misau", "Ningi", "Shira", "Tafawa Balewa", "Toro", "Warji", "Zaki"],
-    "Benue": ["Ado", "Agatu", "Apa", "Buruku", "Gboko", "Guma", "Gwer East", "Gwer West", "Katsina-Ala", "Konshisha", "Kwande", "Logo", "Makurdi", "Obi", "Ogbadibo", "Ohimini", "Oju", "Okpokwu", "Otukpo", "Tarka", "Ukum", "Ushongo", "Vandeikya"],
-    "Borno": ["Abadam", "Askira/Uba", "Bama", "Bayo", "Biu", "Chibok", "Damboa", "Dikwa", "Gubio", "Guzamala", "Gwoza", "Hawul", "Jere", "Kaga", "Kala/Balge", "Konduga", "Kukawa", "Kwaya Kusar", "Mafa", "Magumeri", "Maiduguri", "Marte", "Mobbar", "Monguno", "Ngala", "Nganzai", "Shani"],
-    "Gombe": ["Akko", "Balanga", "Billiri", "Dukku", "Funakaye", "Gombe", "Kaltungo", "Kwami", "Nafada", "Shongom", "Yamaltu/Deba"],
-    "Jigawa": ["Auyo", "Babura", "Biriniwa", "Birnin Kudu", "Buji", "Dutse", "Gagarawa", "Garki", "Gumel", "Guri", "Gwaram", "Gwiwa", "Hadejia", "Jahun", "Kafin Hausa", "Kaugama", "Kazaure", "Kiri Kasama", "Kiyawa", "Maigatari", "Malam Madori", "Miga", "Ringim", "Roni", "Sule Tankarkar", "Taura", "Yankwashi"],
-    "Kaduna": ["Birnin Gwari", "Chikun", "Giwa", "Igabi", "Ikara", "Jaba", "Jema'a", "Kachia", "Kaduna North", "Kaduna South", "Kagarko", "Kajuru", "Kaura", "Kauru", "Kubau", "Kudan", "Lere", "Makarfi", "Sabon Gari", "Sanga", "Soba", "Zangon Kataf", "Zaria"],
-    "Kano": ["Ajingi", "Albasu", "Bagwai", "Bebeji", "Bichi", "Bunkure", "Dala", "Dambatta", "Dawakin Kudu", "Dawakin Tofa", "Doguwa", "Fagge", "Gabasawa", "Garko", "Garun Mallam", "Gaya", "Gezawa", "Gwale", "Gwarzo", "Kabo", "Kano Municipal", "Karaye", "Kibiya", "Kiru", "Kumbotso", "Kunchi", "Kura", "Madobi", "Makoda", "Minjibir", "Nasarawa", "Rano", "Rimin Gado", "Rogo", "Shanono", "Sumaila", "Takai", "Tarauni", "Tofa", "Tsanyawa", "Tudun Wada", "Ungogo", "Warawa", "Wudil"],
-    "Katsina": ["Bakori", "Batagarawa", "Batsari", "Baure", "Bindawa", "Charanchi", "Dandume", "Danja", "Dan Musa", "Daura", "Dutsi", "Dutsin-Ma", "Faskari", "Funtua", "Ingawa", "Jibia", "Kafur", "Kaita", "Kankara", "Kankia", "Katsina", "Kurfi", "Kusada", "Mai'Adua", "Malumfashi", "Mani", "Mashi", "Matazu", "Musawa", "Rimi", "Sabuwa", "Safana", "Sandamu", "Zango"],
-    "Kebbi": ["Aleiro", "Arewa Dandi", "Argungu", "Augie", "Bagudo", "Birnin Kebbi", "Bunza", "Dandi", "Fakai", "Gwandu", "Jega", "Kalgo", "Koko/Besse", "Maiyama", "Ngaski", "Sakaba", "Shanga", "Suru", "Wasagu/Danko", "Yauri", "Zuru"],
-    "Kogi": ["Adavi", "Ajaokuta", "Ankpa", "Bassa", "Dekina", "Ibaji", "Idah", "Igalamela-Odolu", "Ijumu", "Kabba/Bunu", "Kogi", "Lokoja", "Mopa-Muro", "Ofu", "Ogori/Magongo", "Okehi", "Okene", "Olamaboro", "Omala", "Yagba East", "Yagba West"],
-    "Kwara": ["Asa", "Baruten", "Edu", "Ekiti", "Ifelodun", "Ilorin East", "Ilorin South", "Ilorin West", "Irepodun", "Isin", "Kaiama", "Moro", "Offa", "Oke Ero", "Oyun", "Pategi"],
-    "Nasarawa": ["Akwanga", "Awe", "Doma", "Karu", "Keana", "Keffi", "Kokona", "Lafia", "Nasarawa", "Nasarawa Egon", "Obi", "Toto", "Wamba"],
-    "Niger": ["Agaie", "Agwara", "Bida", "Borgu", "Bosso", "Chanchaga", "Edati", "Gbako", "Gurara", "Katcha", "Kontagora", "Lapai", "Lavun", "Magama", "Mariga", "Mashegu", "Mokwa", "Munya", "Paikoro", "Rafi", "Rijau", "Shiroro", "Suleja", "Tafa", "Wushishi"],
-    "Plateau": ["Barkin Ladi", "Bassa", "Bokkos", "Jos East", "Jos North", "Jos South", "Kanam", "Kanke", "Langtang North", "Langtang South", "Mangu", "Mikang", "Pankshin", "Qua'an Pan", "Riyom", "Shendam", "Wase"],
-    "Sokoto": ["Binji", "Bodinga", "Dange Shuni", "Gada", "Goronyo", "Gudu", "Gwadabawa", "Illela", "Isa", "Kebbe", "Kware", "Rabah", "Sabon Birni", "Shagari", "Silame", "Sokoto North", "Sokoto South", "Tambuwal", "Tangaza", "Tureta", "Wamako", "Wurno", "Yabo"],
-    "Taraba": ["Ardo Kola", "Bali", "Donga", "Gashaka", "Gassol", "Ibi", "Jalingo", "Karim Lamido", "Kuburu", "Lau", "Sardauna", "Takum", "Ussa", "Wukari", "Yorro", "Zing"],
-    "Yobe": ["Bade", "Bursari", "Damaturu", "Fika", "Fune", "Geidam", "Gujba", "Gulani", "Jakusko", "Karasuwa", "Machina", "Nangere", "Nguru", "Potiskum", "Tarmuwa", "Yunusari", "Yusufari"],
-    "Zamfara": ["Anka", "Bakura", "Birnin Magaji/Kiyaw", "Bukkuyum", "Bungudu", "Gummi", "Gusau", "Kaura Namoda", "Maradun", "Maru", "Shinkafi", "Talata Mafara", "Tsafe", "Zurmi"],
-    "FCT": ["Abaji", "Bwari", "Gwagwalada", "Kuje", "Kwali", "Municipal"]
-  };
-
-  document.getElementById("stateOfOrigin").addEventListener("change", function () {
-    const s = this.value;
-    const lgaSelect = document.getElementById("lgaOfOrigin");
-    lgaSelect.innerHTML = '<option value="">Select LGA</option>';
-    if (lgaData[s]) {
-      lgaData[s].forEach(lga => {
-        const o = document.createElement("option");
-        o.value = lga;
-        o.textContent = lga;
-        lgaSelect.appendChild(o);
-      });
-    }
-  });
-</script>
-  
 </body>
 </html>
