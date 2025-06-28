@@ -339,5 +339,80 @@
   </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script type="module">
+  // Firebase SDKs
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+  import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+  import { getFirestore, collection, addDoc, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+
+  // Your Firebase config
+  const firebaseConfig = {
+    apiKey: "AIzaSyDWNLns4skz3zOyvYxIssiR0B3QSGN1li8",
+    authDomain: "arewa-progressive-eagle.firebaseapp.com",
+    projectId: "arewa-progressive-eagle",
+    storageBucket: "arewa-progressive-eagle.firebasestorage.app",
+    messagingSenderId: "1002389077766",
+    appId: "1:1002389077766:web:9af458f75b345588dea887"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  // 🔒 LOGIN: Handle member login
+  document.getElementById("login-form")?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      alert("Login successful");
+      showSection("hero");
+      document.getElementById("auth-buttons").innerHTML = `
+        <button class="btn btn-outline-warning ms-2" onclick="logout()">Log Out</button>
+      `;
+    } catch (error) {
+      alert("Login failed: " + error.message);
+    }
+  });
+
+  // 📝 REPORT FORM (Optional – hook up when you add this section)
+  document.getElementById("report-form")?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const name = e.target.elements[0].value;
+    const role = e.target.elements[1].value;
+    const week = e.target.elements[2].value;
+    const report = e.target.elements[3].value;
+
+    try {
+      await addDoc(collection(db, "weekly_reports"), {
+        name,
+        role,
+        week,
+        report,
+        timestamp: new Date()
+      });
+      alert("Report submitted successfully!");
+      e.target.reset();
+    } catch (err) {
+      alert("Error submitting report: " + err.message);
+    }
+  });
+
+  // 🔓 LOGOUT function
+  window.logout = async function () {
+    await signOut(auth);
+    alert("Logged out");
+    showSection("hero");
+    document.getElementById("auth-buttons").innerHTML = `
+      <a href="#login" class="btn btn-outline-light ms-2" onclick="showSection('login')">Login</a>
+    `;
+  };
+</script>
+
+
 </body>
 </html>
