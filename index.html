@@ -220,7 +220,7 @@
               <input type="email" class="form-control" required>
             </div>
           </div>
-          
+
           <div class="row mb-3">
   <div class="col">
     <label class="form-label">State of Origin</label>
@@ -255,7 +255,6 @@
     </select>
   </div>
 </div>
-
             </div>
             <div class="col">
               <label class="form-label">LGA of Origin</label>
@@ -461,28 +460,26 @@
     "Niger": ["Agaie", "Agwara", "Bida", "Borgu", "Bosso", "Chanchaga", "Edati", "Gbako", "Gurara", "Katcha", "Kontagora", "Lapai", "Lavun", "Magama", "Mariga", "Mashegu", "Mokwa", "Munya", "Paikoro", "Rafi", "Rijau", "Shiroro", "Suleja", "Tafa", "Wushishi"],
     "Plateau": ["Barkin Ladi", "Bassa", "Bokkos", "Jos East", "Jos North", "Jos South", "Kanam", "Kanke", "Langtang North", "Langtang South", "Mangu", "Mikang", "Pankshin", "Qua'an Pan", "Riyom", "Shendam", "Wase"],
     "Sokoto": ["Binji", "Bodinga", "Dange Shuni", "Gada", "Goronyo", "Gudu", "Gwadabawa", "Illela", "Isa", "Kebbe", "Kware", "Rabah", "Sabon Birni", "Shagari", "Silame", "Sokoto North", "Sokoto South", "Tambuwal", "Tangaza", "Tureta", "Wamako", "Wurno", "Yabo"],
-    "Taraba": ["Ardo Kola", "Bali", "Donga", "Gashaka", "Gassol", "Ibi", "Jalingo", "Karim Lamido", "Kumi", "Lau", "Sardauna", "Takum", "Ussa", "Wukari", "Yorro", "Zing"],
+    "Taraba": ["Ardo Kola", "Bali", "Donga", "Gashaka", "Gassol", "Ibi", "Jalingo", "Karim Lamido", "Kuburu", "Lau", "Sardauna", "Takum", "Ussa", "Wukari", "Yorro", "Zing"],
     "Yobe": ["Bade", "Bursari", "Damaturu", "Fika", "Fune", "Geidam", "Gujba", "Gulani", "Jakusko", "Karasuwa", "Machina", "Nangere", "Nguru", "Potiskum", "Tarmuwa", "Yunusari", "Yusufari"],
     "Zamfara": ["Anka", "Bakura", "Birnin Magaji/Kiyaw", "Bukkuyum", "Bungudu", "Gummi", "Gusau", "Kaura Namoda", "Maradun", "Maru", "Shinkafi", "Talata Mafara", "Tsafe", "Zurmi"],
     "FCT": ["Abaji", "Bwari", "Gwagwalada", "Kuje", "Kwali", "Municipal"]
   };
 
   document.getElementById("stateOfOrigin").addEventListener("change", function () {
-    const selectedState = this.value;
+    const s = this.value;
     const lgaSelect = document.getElementById("lgaOfOrigin");
     lgaSelect.innerHTML = '<option value="">Select LGA</option>';
-
-    if (lgaData[selectedState]) {
-      lgaData[selectedState].forEach(lga => {
-        const option = document.createElement("option");
-        option.value = lga;
-        option.textContent = lga;
-        lgaSelect.appendChild(option);
+    if (lgaData[s]) {
+      lgaData[s].forEach(lga => {
+        const o = document.createElement("option");
+        o.value = lga;
+        o.textContent = lga;
+        lgaSelect.appendChild(o);
       });
     }
   });
 </script>
-
   
 </body>
 </html>
