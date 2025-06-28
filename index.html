@@ -221,32 +221,40 @@
             </div>
           </div>
           <div class="row mb-3">
-            <div class="col">
-              <label class="form-label">State of Origin</label>
-              <select class="form-control" required>
-                <o<select class="form-control" required>
-  <option value="">Select State</option>
-  <option>Adamawa</option>
-  <option>Bauchi</option>
-  <option>Benue</option>
-  <option>Borno</option>
-  <option>Gombe</option>
-  <option>Jigawa</option>
-  <option>Kaduna</option>
-  <option>Kano</option>
-  <option>Katsina</option>
-  <option>Kebbi</option>
-  <option>Kogi</option>
-  <option>Kwara</option>
-  <option>Nasarawa</option>
-  <option>Niger</option>
-  <option>Plateau</option>
-  <option>Sokoto</option>
-  <option>Taraba</option>
-  <option>Yobe</option>
-  <option>Zamfara</option>
-  <option>FCT</option>
-</select>
+  <div class="col">
+    <label class="form-label">State of Origin</label>
+    <select class="form-control" id="stateOfOrigin" required>
+      <option value="">Select State</option>
+      <option>Adamawa</option>
+      <option>Bauchi</option>
+      <option>Benue</option>
+      <option>Borno</option>
+      <option>Gombe</option>
+      <option>Jigawa</option>
+      <option>Kaduna</option>
+      <option>Kano</option>
+      <option>Katsina</option>
+      <option>Kebbi</option>
+      <option>Kogi</option>
+      <option>Kwara</option>
+      <option>Nasarawa</option>
+      <option>Niger</option>
+      <option>Plateau</option>
+      <option>Sokoto</option>
+      <option>Taraba</option>
+      <option>Yobe</option>
+      <option>Zamfara</option>
+      <option>FCT</option>
+    </select>
+  </div>
+  <div class="col">
+    <label class="form-label">LGA of Origin</label>
+    <select class="form-control" id="lgaOfOrigin" required>
+      <option value="">Select LGA</option>
+    </select>
+  </div>
+</div>
+
             </div>
             <div class="col">
               <label class="form-label">LGA of Origin</label>
@@ -434,6 +442,46 @@
   };
 </script>
 
+<script>
+  const lgaData = {
+    "Adamawa": ["Yola North", "Yola South", "Girei", "Numan", "Michika", "Mubi North"],
+    "Bauchi": ["Bauchi", "Tafawa Balewa", "Katagum", "Misau"],
+    "Benue": ["Makurdi", "Gboko", "Otukpo"],
+    "Borno": ["Maiduguri", "Jere", "Biu"],
+    "Gombe": ["Gombe", "Akko", "Dukku"],
+    "Jigawa": ["Dutse", "Hadejia", "Garki"],
+    "Kaduna": ["Kaduna North", "Kaduna South", "Zaria", "Kachia"],
+    "Kano": ["Kano Municipal", "Fagge", "Nassarawa"],
+    "Katsina": ["Katsina", "Daura", "Funtua"],
+    "Kebbi": ["Birnin Kebbi", "Argungu", "Zuru"],
+    "Kogi": ["Lokoja", "Okene", "Idah"],
+    "Kwara": ["Ilorin East", "Ilorin West", "Offa"],
+    "Nasarawa": ["Lafia", "Keffi", "Akwanga"],
+    "Niger": ["Minna", "Bida", "Suleja"],
+    "Plateau": ["Jos North", "Jos South", "Barkin Ladi"],
+    "Sokoto": ["Sokoto North", "Sokoto South", "Wurno"],
+    "Taraba": ["Jalingo", "Wukari", "Bali"],
+    "Yobe": ["Damaturu", "Potiskum", "Nguru"],
+    "Zamfara": ["Gusau", "Kaura Namoda", "Anka"],
+    "FCT": ["Abuja Municipal", "Bwari", "Gwagwalada"]
+  };
 
+  document.getElementById("stateOfOrigin").addEventListener("change", function () {
+    const selectedState = this.value;
+    const lgaSelect = document.getElementById("lgaOfOrigin");
+    lgaSelect.innerHTML = '<option value="">Select LGA</option>';
+
+    if (lgaData[selectedState]) {
+      lgaData[selectedState].forEach(lga => {
+        const option = document.createElement("option");
+        option.value = lga;
+        option.textContent = lga;
+        lgaSelect.appendChild(option);
+      });
+    }
+  });
+</script>
+
+  
 </body>
 </html>
