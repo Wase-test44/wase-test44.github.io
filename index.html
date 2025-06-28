@@ -84,7 +84,37 @@
       margin: 0 10px;
       cursor: pointer;
     }
-  </style>
+    @keyframes flashColors {
+  0% {
+    color: maroon;
+    text-shadow: 0 0 10px maroon;
+  }
+  33% {
+    color: yellow;
+    text-shadow: 0 0 10px yellow;
+  }
+  66% {
+    color: green;
+    text-shadow: 0 0 10px green;
+  }
+  100% {
+    color: maroon;
+    text-shadow: 0 0 10px maroon;
+  }
+}
+
+.flash-glow-text {
+  font-family: 'Bookman Old Style', serif !important;
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: center;
+  animation: flashColors 2s infinite ease-in-out;
+  text-shadow:
+    0 0 5px #fff,
+    0 0 10px #fff,
+    0 0 15px #fff;
+}
+</style>
   <script>
     function showSection(id) {
       document.querySelectorAll(".section-content").forEach((section) => {
