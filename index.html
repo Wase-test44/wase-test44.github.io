@@ -33,7 +33,7 @@
     }
     header {
   background-color: #004d00;
-  padding: 5px 0;
+  padding: 20px 0;
   transition: all 0.5s ease-in-out;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
   border-bottom: 3px solid #006400;
@@ -42,41 +42,11 @@
   opacity: 0;
   transform: translateY(-20px);
   animation: headerFadeIn 1s forwards;
+  text-align: center;
+  flex-direction: column;
+  align-items: center;
 }
 
-header:hover {
-  animation: headerHoverCycle 3s infinite alternate;
-  transform: scale(1.02);
-  box-shadow: 0 0 20px rgba(50, 205, 50, 0.6);
-}
-
-@keyframes headerHoverCycle {
-  0% {
-    background-color: #004d00;
-    border-color: #006400;
-  }
-  33% {
-    background-color: #006400;
-    border-color: #228B22;
-  }
-  66% {
-    background-color: #228B22;
-    border-color: #00cc44;
-  }
-  100% {
-    background-color: #004d00;
-    border-color: #006400;
-  }
-}
-
-@keyframes headerFadeIn {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-    }
     header img {
       height: 20px;
       width: auto;
@@ -206,7 +176,7 @@ header:hover {
 </head>
 <body>
   <main>
-    <header class="container d-flex align-items-center gap-3">
+    <header class="container d-flex flex-column align-items-center">
   <img src="APEM.jpg" alt="Logo" />
   <div>
    <h1 class="flash-glow-text">AREWA PROGRESSIVE EAGLE MOVEMENT</h1>
