@@ -96,6 +96,38 @@
         target.scrollIntoView({ behavior: "smooth" });
       }
     }
+  @keyframes flashColors {
+  0% {
+    color: maroon;
+    text-shadow: 0 0 8px maroon;
+  }
+  33% {
+    color: yellow;
+    text-shadow: 0 0 8px yellow;
+  }
+  66% {
+    color: green;
+    text-shadow: 0 0 8px green;
+  }
+  100% {
+    color: maroon;
+    text-shadow: 0 0 8px maroon;
+  }
+}
+
+.flash-glow-text {
+  font-family: 'Bookman Old Style', serif;
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: center;
+  animation: flashColors 2s infinite;
+  text-shadow:
+    0 0 10px rgba(255, 255, 255, 0.1),
+    0 0 20px rgba(255, 255, 255, 0.2),
+    0 0 30px rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease-in-out;
+}
+
   </script>
 </head>
 <body>
@@ -103,7 +135,7 @@
     <header class="container d-flex align-items-center gap-3">
   <img src="APEM.jpg" alt="Logo" />
   <div>
-    <h1>AREWA Progressive Eagle Movement</h1>
+   <h1 class="flash-glow-text">AREWA PROGRESSIVE EAGLE MOVEMENT</h1>
     <p class="fst-italic ms-2">...Succeeding together</p>
   </div>
 </header>
