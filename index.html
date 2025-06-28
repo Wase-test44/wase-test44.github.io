@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>AREWA Progressive Eagle Movement</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+  />
   <style>
     .dropdown-menu {
       background-color: #28a745;
@@ -58,14 +61,19 @@
     .active-section {
       display: block !important;
     }
-    #login .container, #forgot-password .container, #signup .container {
+    #login .container,
+    #forgot-password .container,
+    #signup .container {
       max-width: 400px;
       margin: 0 auto;
       background-color: rgba(0, 0, 0, 0.3);
       padding: 30px;
       border-radius: 10px;
     }
-    #login input.form-control, #forgot-password input.form-control, #signup input.form-control {
+    #login input.form-control,
+    #forgot-password input.form-control,
+    #signup input.form-control,
+    #signup select.form-control {
       width: 100%;
     }
     .form-links {
@@ -74,17 +82,18 @@
     .form-links a {
       color: #f8f9fa;
       margin: 0 10px;
+      cursor: pointer;
     }
   </style>
   <script>
     function showSection(id) {
-      document.querySelectorAll('.section-content').forEach(section => {
-        section.classList.remove('active-section');
+      document.querySelectorAll(".section-content").forEach((section) => {
+        section.classList.remove("active-section");
       });
       const target = document.getElementById(id);
       if (target) {
-        target.classList.add('active-section');
-        target.scrollIntoView({ behavior: 'smooth' });
+        target.classList.add("active-section");
+        target.scrollIntoView({ behavior: "smooth" });
       }
     }
   </script>
@@ -92,37 +101,92 @@
 <body>
   <main>
     <header class="container d-flex align-items-center gap-3">
-      <img src="APEM.jpg" alt="Logo">
+      <img src="APEM.jpg" alt="Logo" />
       <h1>AREWA Progressive Eagle Movement</h1>
     </header>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-success">
       <div class="container">
-        <a class="navbar-brand" href="#" onclick="showSection('hero')">Home</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <a
+          class="navbar-brand"
+          href="#"
+          onclick="showSection('hero')"
+          >Home</a
+        >
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav me-auto">
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="aboutDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
                 About
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#" onclick="showSection('philosophy')">Philosophy</a></li>
-                <li><a class="dropdown-item" href="#" onclick="showSection('aims')">Aims & Objectives</a></li>
-                <li><a class="dropdown-item" href="#" onclick="showSection('activities')">Activities</a></li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    onclick="showSection('philosophy')"
+                    >Philosophy</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    onclick="showSection('aims')"
+                    >Aims & Objectives</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    onclick="showSection('activities')"
+                    >Activities</a
+                  >
+                </li>
               </ul>
             </li>
-            <li class="nav-item"><a class="nav-link" href="#" onclick="showSection('careers')">Careers</a></li>
-            <li class="nav-item"><a class="nav-link" href="#" onclick="showSection('gallery')">Gallery</a></li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" onclick="showSection('careers')"
+                >Careers</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" onclick="showSection('gallery')"
+                >Gallery</a
+              >
+            </li>
           </ul>
           <form class="d-flex">
-            <input class="form-control me-2" type="search" placeholder="Search">
+            <input
+              class="form-control me-2"
+              type="search"
+              placeholder="Search"
+            />
             <button class="btn btn-warning" type="submit">Search</button>
           </form>
           <div id="auth-buttons">
-            <a href="#" class="btn btn-outline-light ms-2" onclick="showSection('login')">Login</a>
+            <a
+              href="#"
+              class="btn btn-outline-light ms-2"
+              onclick="showSection('login')"
+              >Login</a
+            >
           </div>
         </div>
       </div>
@@ -136,7 +200,10 @@
     <section id="philosophy" class="section-content">
       <div class="container">
         <h3>Our Philosophy</h3>
-        <p>We believe in empowering communities through self-reliance, education, and cultural pride.</p>
+        <p>
+          We believe in empowering communities through self-reliance,
+          education, and cultural pride.
+        </p>
       </div>
     </section>
 
@@ -154,14 +221,20 @@
     <section id="activities" class="section-content">
       <div class="container">
         <h3>Our Activities</h3>
-        <p>We organize community development projects, environmental campaigns, and educational seminars.</p>
+        <p>
+          We organize community development projects, environmental campaigns,
+          and educational seminars.
+        </p>
       </div>
     </section>
 
     <section id="careers" class="section-content">
       <div class="container">
         <h3>Careers</h3>
-        <p>Join us in making a difference. Volunteer, intern, or become a permanent team member.</p>
+        <p>
+          Join us in making a difference. Volunteer, intern, or become a
+          permanent team member.
+        </p>
       </div>
     </section>
 
@@ -178,17 +251,20 @@
         <form id="login-form">
           <div class="mb-3">
             <label for="email" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="email" required>
+            <input type="email" class="form-control" id="email" required />
           </div>
           <div class="mb-3">
             <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" required>
+            <input type="password" class="form-control" id="password" required />
           </div>
           <div class="text-center">
             <button type="submit" class="btn btn-primary">Login</button>
           </div>
           <div class="form-links text-center">
-            <a href="#" onclick="showSection('forgot-password')">Forgot Password?</a> |
+            <a href="#" onclick="showSection('forgot-password')"
+              >Forgot Password?</a
+            >
+            |
             <a href="#" onclick="showSection('signup')">Sign Up</a>
           </div>
         </form>
@@ -200,11 +276,21 @@
         <h3 class="text-center">Password Recovery</h3>
         <form>
           <div class="mb-3">
-            <label for="recoveryEmail" class="form-label">Enter your registered email</label>
-            <input type="email" class="form-control" id="recoveryEmail" placeholder="you@example.com" required>
+            <label for="recoveryEmail" class="form-label"
+              >Enter your registered email</label
+            >
+            <input
+              type="email"
+              class="form-control"
+              id="recoveryEmail"
+              placeholder="you@example.com"
+              required
+            />
           </div>
           <div class="text-center">
-            <button type="submit" class="btn btn-warning">Send Recovery Link</button>
+            <button type="submit" class="btn btn-warning">
+              Send Recovery Link
+            </button>
           </div>
           <div class="form-links text-center mt-3">
             <a href="#" onclick="showSection('login')">Back to Login</a>
@@ -219,19 +305,19 @@
         <form>
           <div class="mb-3">
             <label class="form-label">Surname</label>
-            <input type="text" class="form-control" required>
+            <input type="text" class="form-control" required />
           </div>
           <div class="mb-3">
             <label class="form-label">First Name</label>
-            <input type="text" class="form-control" required>
+            <input type="text" class="form-control" required />
           </div>
           <div class="mb-3">
             <label class="form-label">Other Name</label>
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" />
           </div>
           <div class="mb-3">
             <label class="form-label">Date of Birth</label>
-            <input type="date" class="form-control" required>
+            <input type="date" class="form-control" required />
           </div>
           <div class="mb-3">
             <label class="form-label">Gender</label>
@@ -244,31 +330,55 @@
           </div>
           <div class="mb-3">
             <label class="form-label">Phone Number</label>
-            <input type="tel" class="form-control" required>
+            <input type="tel" class="form-control" required />
           </div>
           <div class="mb-3">
             <label class="form-label">Email</label>
-            <input type="email" class="form-control" required>
+            <input type="email" class="form-control" required />
           </div>
           <div class="mb-3">
             <label class="form-label">State of Origin</label>
-            <input type="text" class="form-control" required>
+            <select class="form-control" id="stateOfOrigin" required>
+              <option value="">Select State</option>
+              <option>Adamawa</option>
+              <option>Bauchi</option>
+              <option>Benue</option>
+              <option>Borno</option>
+              <option>Gombe</option>
+              <option>Jigawa</option>
+              <option>Kaduna</option>
+              <option>Kano</option>
+              <option>Katsina</option>
+              <option>Kebbi</option>
+              <option>Kogi</option>
+              <option>Kwara</option>
+              <option>Nasarawa</option>
+              <option>Niger</option>
+              <option>Plateau</option>
+              <option>Sokoto</option>
+              <option>Taraba</option>
+              <option>Yobe</option>
+              <option>Zamfara</option>
+              <option>FCT</option>
+            </select>
           </div>
           <div class="mb-3">
             <label class="form-label">LGA of Origin</label>
-            <input type="text" class="form-control" required>
+            <select class="form-control" id="lgaOfOrigin" required>
+              <option value="">Select LGA</option>
+            </select>
           </div>
           <div class="mb-3">
             <label class="form-label">Residential Address</label>
-            <input type="text" class="form-control" required>
+            <input type="text" class="form-control" required />
           </div>
           <div class="mb-3">
             <label class="form-label">Educational Qualification</label>
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" />
           </div>
           <div class="mb-3">
             <label class="form-label">Occupation</label>
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" />
           </div>
           <div class="mb-3">
             <label class="form-label">Preferred Role/Department</label>
@@ -286,30 +396,83 @@
           </div>
           <div class="mb-3">
             <label class="form-label">Passport Photo</label>
-            <input type="file" class="form-control" accept="image/*" required>
+            <input
+              type="file"
+              class="form-control"
+              accept="image/*"
+              required
+            />
           </div>
           <div class="mb-3">
             <label class="form-label">Upload ID Card (Optional)</label>
-            <input type="file" class="form-control" accept="image/*">
+            <input type="file" class="form-control" accept="image/*" />
           </div>
           <div class="mb-3">
             <label class="form-label">Official Access Code</label>
-            <input type="password" class="form-control" id="accessCode" required>
+            <input
+              type="password"
+              class="form-control"
+              id="accessCode"
+              required
+            />
           </div>
           <div class="mb-3 form-check">
-            <input type="checkbox" class="form-check-input" id="agreement" required>
-            <label class="form-check-label" for="agreement">I agree to uphold the values of AREWA Progressive Eagle Movement.</label>
+            <input
+              type="checkbox"
+              class="form-check-input"
+              id="agreement"
+              required
+            />
+            <label class="form-check-label" for="agreement"
+              >I agree to uphold the values of AREWA Progressive Eagle
+              Movement.</label
+            >
           </div>
           <div class="text-center">
             <button type="submit" class="btn btn-success">Sign Up</button>
           </div>
           <div class="form-links text-center mt-3">
-            <a href="#" onclick="showSection('login')">Already registered? Login</a>
+            <a href="#" onclick="showSection('login')"
+              >Already registered? Login</a
+            >
           </div>
         </form>
       </div>
     </section>
-
   </main>
-</body>
-</html>
+
+  <script>
+    const lgaData = {
+      Adamawa: [
+        "Demsa",
+        "Fufore",
+        "Ganye",
+        "Girei",
+        "Guyuk",
+        "Hong",
+        "Jada",
+        "Lamurde",
+        "Madagali",
+        "Maiha",
+        "Mayo-Belwa",
+        "Michika",
+        "Mubi North",
+        "Mubi South",
+        "Numan",
+        "Shelleng",
+        "Song",
+        "Toungo",
+        "Yola North",
+        "Yola South",
+      ],
+      Bauchi: [
+        "Alkaleri",
+        "Bauchi",
+        "Bogoro",
+        "Damban",
+        "Darazo",
+        "Dass",
+        "Gamawa",
+        "Ganjuwa",
+        "Giade",
+        "It
