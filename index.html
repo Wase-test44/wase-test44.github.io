@@ -316,19 +316,35 @@
       <label class="form-label">Other Name</label>
       <input type="text" class="form-control" />
     </div>
-          <div class="mb-3">
-            <label class="form-label">Date of Birth</label>
-            <input type="date" class="form-control" required />
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Gender</label>
-            <select class="form-control" required>
-              <option value="">Select Gender</option>
-              <option>Male</option>
-              <option>Female</option>
-              <option>Other</option>
-            </select>
-          </div>
+          <div class="row g-3 mb-3">
+  <div class="col-md-6">
+    <label class="form-label">Date of Birth</label>
+    <input
+      type="date"
+      class="form-control"
+      id="dob"
+      required
+      min="1960-01-01"
+      max=""
+    />
+  </div>
+  <div class="col-md-6">
+    <label class="form-label">Gender</label>
+    <select class="form-control" required>
+      <option value="">Select Gender</option>
+      <option>Male</option>
+      <option>Female</option>
+      <option>Other</option>
+    </select>
+  </div>
+</div>
+
+<script>
+  // Set the max attribute of DOB input to today's date dynamically
+  const dobInput = document.getElementById('dob');
+  const today = new Date().toISOString().split('T')[0];
+  dobInput.setAttribute('max', today);
+</script>
           <div class="mb-3">
             <label class="form-label">Phone Number</label>
             <input type="tel" class="form-control" required />
