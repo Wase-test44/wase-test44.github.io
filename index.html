@@ -9,126 +9,109 @@
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
   />
   <style>
-    .dropdown-menu {
-      background-color: #28a745;
-      border: none;
-    }
-    .dropdown-menu .dropdown-item {
-      color: white;
-    }
-    .dropdown-menu .dropdown-item:hover {
-      background-color: #218838;
-    }
-    body {
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-      background: linear-gradient(135deg, #006400, #32CD32, #FAFAD2);
-      color: #fff;
-      font-family: Arial, sans-serif;
-      margin: 0;
-    }
-    main {
-      flex: 1;
-    }
-    header {
-  background-color: #004d00;
-  padding: 20px 0;
-  transition: all 0.5s ease-in-out;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-  border-bottom: 3px solid #006400;
-  position: relative;
-  z-index: 1;
-  opacity: 0;
-  transform: translateY(-20px);
-  animation: headerFadeIn 1s forwards;
-  text-align: center;
-  flex-direction: column;
-  align-items: center;
-}
+  .dropdown-menu {
+    background-color: #28a745;
+    border: none;
+  }
+  .dropdown-menu .dropdown-item {
+    color: white;
+  }
+  .dropdown-menu .dropdown-item:hover {
+    background-color: #218838;
+  }
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #006400, #32CD32, #FAFAD2);
+    color: #fff;
+    font-family: Arial, sans-serif;
+    margin: 0;
+  }
+  main {
+    flex: 1;
+  }
 
-    header img {
-      height: 20px;
-      width: auto;
-    }
-    nav a {
-      color: #fff !important;
-    }
-    footer {
-      background-color: #002d00;
-      padding: 10px;
-      text-align: center;
-      margin-top: auto;
-    }
-    section#hero {
-      background: rgba(0, 0, 0, 0.3);
-      border-radius: 10px;
-      padding: 60px;
-      text-align: center;
-    }
-    .section-content {
-      padding: 40px 20px;
-      display: none;
-    }
-    .active-section {
-      display: block !important;
-    }
-    #login .container,
-    #forgot-password .container,
-    #signup .container {
-      max-width: 400px;
-      margin: 0 auto;
-      background-color: rgba(0, 0, 0, 0.3);
-      padding: 30px;
-      border-radius: 10px;
-    }
-    #login input.form-control,
-    #forgot-password input.form-control,
-    #signup input.form-control,
-    #signup select.form-control {
-      width: 100%;
-    }
-    .form-links {
-      margin-top: 15px;
-    }
-    .form-links a {
-      color: #f8f9fa;
-      margin: 0 10px;
-      cursor: pointer;
-    }
-    @keyframes flashColors {
-  0% {
-    color: maroon;
-    text-shadow: 0 0 10px maroon;
+  nav a {
+    color: #fff !important;
   }
-  33% {
-    color: yellow;
-    text-shadow: 0 0 10px yellow;
+  footer {
+    background-color: #002d00;
+    padding: 10px;
+    text-align: center;
+    margin-top: auto;
   }
-  66% {
-    color: green;
-    text-shadow: 0 0 10px green;
+  section#hero {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    padding: 60px;
+    text-align: center;
   }
-  100% {
-    color: maroon;
-    text-shadow: 0 0 10px maroon;
+  .section-content {
+    padding: 40px 20px;
+    display: none;
   }
-}
+  .active-section {
+    display: block !important;
+  }
+  #login .container,
+  #forgot-password .container,
+  #signup .container {
+    max-width: 400px;
+    margin: 0 auto;
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 30px;
+    border-radius: 10px;
+  }
+  #login input.form-control,
+  #forgot-password input.form-control,
+  #signup input.form-control,
+  #signup select.form-control {
+    width: 100%;
+  }
+  .form-links {
+    margin-top: 15px;
+  }
+  .form-links a {
+    color: #f8f9fa;
+    margin: 0 10px;
+    cursor: pointer;
+  }
 
-.flash-glow-text {
-  font-family: 'Bookman Old Style', serif !important;
-  font-size: 2.5rem;
-  font-weight: bold;
-  text-align: center;
-  animation: flashColors 2.5s infinite ease-in-out;
-  text-shadow:
-    0 0 8px #fff,
-    0 0 12px yellow,
-    0 0 20px green,
-    0 0 24px maroon;
-  transition: all 0.4s ease-in-out;
-}
+  @keyframes flashColors {
+    0% {
+      color: maroon;
+      text-shadow: 0 0 10px maroon;
+    }
+    33% {
+      color: yellow;
+      text-shadow: 0 0 10px yellow;
+    }
+    66% {
+      color: green;
+      text-shadow: 0 0 10px green;
+    }
+    100% {
+      color: maroon;
+      text-shadow: 0 0 10px maroon;
+    }
+  }
+
+  .flash-glow-text {
+    font-family: 'Bookman Old Style', serif !important;
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+    animation: flashColors 2.5s infinite ease-in-out;
+    text-shadow:
+      0 0 8px #fff,
+      0 0 12px yellow,
+      0 0 20px green,
+      0 0 24px maroon;
+    transition: all 0.4s ease-in-out;
+  }
 </style>
+
   <script>
     function showSection(id) {
       document.querySelectorAll(".section-content").forEach((section) => {
@@ -176,10 +159,10 @@
 </head>
 <body>
   <main>
-   <header class="container d-flex flex-column align-items-center">
-  <img src="APEM.jpg" alt="Logo" class="mb-2" />
-  <h1 class="flash-glow-text">AREWA PROGRESSIVE EAGLE MOVEMENT</h1>
-  <p class="fst-italic">...Succeeding together</p>
+  <header class="container d-flex flex-column align-items-center text-center py-3" style="background-color: #004d00; border-bottom: 3px solid #006400;">
+  <img src="APEM.jpg" alt="Logo" class="mb-2" style="height: 60px;" />
+  <h1 class="flash-glow-text" style="color: yellow;">AREWA PROGRESSIVE EAGLE MOVEMENT</h1>
+  <p class="fst-italic text-light">...Succeeding together</p>
 </header>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-success">
