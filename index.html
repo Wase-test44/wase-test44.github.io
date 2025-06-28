@@ -13,12 +13,11 @@
     background-color: #28a745;
     border: none;
   }
+
   .dropdown-menu .dropdown-item {
     color: white;
   }
-  .dropdown-menu .dropdown-item:hover {
-    background-color: #218838;
-  }
+
   body {
     display: flex;
     flex-direction: column;
@@ -28,6 +27,7 @@
     font-family: Arial, sans-serif;
     margin: 0;
   }
+
   main {
     flex: 1;
   }
@@ -35,25 +35,30 @@
   nav a {
     color: #fff !important;
   }
+
   footer {
     background-color: #002d00;
     padding: 10px;
     text-align: center;
     margin-top: auto;
   }
+
   section#hero {
     background: rgba(0, 0, 0, 0.3);
     border-radius: 10px;
     padding: 60px;
     text-align: center;
   }
+
   .section-content {
     padding: 40px 20px;
     display: none;
   }
+
   .active-section {
     display: block !important;
   }
+
   #login .container,
   #forgot-password .container,
   #signup .container {
@@ -63,38 +68,30 @@
     padding: 30px;
     border-radius: 10px;
   }
+
   #login input.form-control,
   #forgot-password input.form-control,
   #signup input.form-control,
   #signup select.form-control {
     width: 100%;
   }
+
   .form-links {
     margin-top: 15px;
   }
+
   .form-links a {
     color: #f8f9fa;
     margin: 0 10px;
     cursor: pointer;
   }
 
-  @keyframes flashColors {
-    0% {
-      color: maroon;
-      text-shadow: 0 0 10px maroon;
-    }
-    33% {
-      color: yellow;
-      text-shadow: 0 0 10px yellow;
-    }
-    66% {
-      color: green;
-      text-shadow: 0 0 10px green;
-    }
-    100% {
-      color: maroon;
-      text-shadow: 0 0 10px maroon;
-    }
+  /* Clean header styles */
+  header {
+    background-color: #004d00;
+    padding: 20px 0;
+    text-align: center;
+    border-bottom: 3px solid #006400;
   }
 
   .flash-glow-text {
@@ -102,13 +99,9 @@
     font-size: 2.5rem;
     font-weight: bold;
     text-align: center;
-    animation: flashColors 2.5s infinite ease-in-out;
-    text-shadow:
-      0 0 8px #fff,
-      0 0 12px yellow,
-      0 0 20px green,
-      0 0 24px maroon;
-    transition: all 0.4s ease-in-out;
+    color: yellow;
+    text-shadow: none;
+    animation: none;
   }
 </style>
 
