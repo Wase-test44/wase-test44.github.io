@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>APEM Login</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background-color: #f4fdf7;
+    }
+    .login-box {
+      max-width: 400px;
+      margin: 80px auto;
+      padding: 30px;
+      background: white;
+      box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <h3 class="text-center mb-4">APEM Member Login</h3>
+    <form id="loginForm">
+      <div class="mb-3">
+        <label class="form-label">Email address</label>
+        <input type="email" class="form-control" id="email" required />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input type="password" class="form-control" id="password" required />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Passkey</label>
+        <input type="text" class="form-control" id="passkeyInput" required />
+      </div>
+      <button type="submit" class="btn btn-success w-100">Login</button>
+    </form>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-auth.js";
+    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_PROJECT_ID.appspot.com",
+      messagingSenderId: "YOUR_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth();
+    const db = getFirestore();
+
+    document.getElementById("loginForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      const passkeyInput = document.getElementById("passkeyInput").value;
+
+      try {
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+        const userDoc = await getDoc(doc(db, "users", user.uid));
+
+        if (!userDoc.exists()) {
+          alert("User data not found.");
+          return;
+        }
+
+        const role = userDoc.data().role;
+
+        const passkeyDoc = await getDoc(doc(db, "passkeys", role));
+        if (!passkeyDoc.exists() || passkeyDoc.data().passkey !== passkeyInput) {
+          alert("Invalid passkey for this role.");
+          return;
+        }
+
+        switch(role) {
+          case "Chairman":
+            window.location.href = "dashboard_chairman.html";
+            break;
+          case "Secretary":
+            window.location.href = "dashboard_secretary.html";
+            break;
+          case "Director of Planning, Research and Documentation":
+            window.location.href = "dashboard_planning.html";
+            break;
+          case "Director of Finance":
+            window.location.href = "dashboard_finance.html";
+            break;
+          case "Director of Environmental Management":
+            window.location.href = "dashboard_environment.html";
+            break;
+          case "Director of Public Affairs":
+            window.location.href = "dashboard_public_affairs.html";
+            break;
+          case "Director of Sports":
+            window.location.href = "dashboard_sports.html";
+            break;
+          case "Director of Culture and Tourism":
+            window.location.href = "dashboard_culture.html";
+            break;
+          case "State Coordinator":
+            window.location.href = "dashboard_state.html";
+            break;
+          case "Admin":
+            window.location.href = "admin_panel.html";
+            break;
+          default:
+            alert("Access denied: Unrecognized role");
+        }
+      } catch (error) {
+        alert("Login failed: " + error.message);
+      }
+    });
+  </script>
+</body>
+</html>
