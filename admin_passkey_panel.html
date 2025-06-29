@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin Passkey Panel</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body { background-color: #f4fdf7; padding: 30px; }
+    .container { max-width: 600px; background: white; padding: 30px; box-shadow: 0px 0px 10px rgba(0,0,0,0.2); border-radius: 10px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h4 class="mb-4">Admin Passkey Management</h4>
+    <form id="passkeyForm" class="mb-3">
+      <div class="mb-3">
+        <label>Position</label>
+        <input type="text" id="position" class="form-control" placeholder="e.g. Chairman" required />
+      </div>
+      <div class="mb-3">
+        <label>Passkey</label>
+        <input type="text" id="passkey" class="form-control" placeholder="e.g. keyChairman2025" required />
+      </div>
+      <button type="submit" class="btn btn-success w-100">Add / Update Passkey</button>
+    </form>
+
+    <hr />
+    <h5>Existing Passkeys</h5>
+    <ul id="passkeyList" class="list-group"></ul>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js";
+    import { getFirestore, doc, setDoc, getDocs, collection, deleteDoc } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_PROJECT_ID.appspot.com",
+      messagingSenderId: "YOUR_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore();
+    const auth = getAuth();
+
+    const positionInput = document.getElementById("position");
+    const passkeyInput = document.getElementById("passkey");
+    const form = document.getElementById("passkeyForm");
+    const list = document.getElementById("passkeyList");
+
+    let currentUser;
+
+    onAuthStateChanged(auth, async user => {
+      if (user) {
+        const userDoc = await getDoc(doc(db, "users", user.uid));
+        const role = userDoc.exists() ? userDoc.data().role : null;
+
+        if (role !== "Chairman" && role !== "Super Admin") {
+          alert("Access denied: You are not authorized.");
+          window.location.href = "index.html";
+          return;
+        }
+
+        currentUser = user;
+        loadPasskeys();
+      } else {
+        alert("Not logged in.");
+        window.location.href = "index.html";
+      }
+    });
+
+    form.addEventListener("submit", async e => {
+      e.preventDefault();
+      const position = positionInput.value.trim();
+      const passkey = passkeyInput.value.trim();
+
+      await setDoc(doc(db, "passkeys", position), { passkey });
+      alert("Passkey saved!");
+      form.reset();
+      loadPasskeys();
+    });
+
+    async function loadPasskeys() {
+      list.innerHTML = "";
+      const snapshot = await getDocs(collection(db, "passkeys"));
+      snapshot.forEach(docSnap => {
+        const data = docSnap.data();
+        const li = document.createElement("li");
+        li.className = "list-group-item d-flex justify-content-between align-items-center";
+        li.innerHTML = `
+          <span><strong>${docSnap.id}:</strong> ${data.passkey}</span>
+          <button class="btn btn-sm btn-danger" onclick="deletePasskey('${docSnap.id}')">Delete</button>
+        `;
+        list.appendChild(li);
+      });
+    }
+
+    window.deletePasskey = async (position) => {
+      if (confirm(`Delete passkey for ${position}?`)) {
+        await deleteDoc(doc(db, "passkeys", position));
+        alert("Passkey deleted.");
+        loadPasskeys();
+      }
+    };
+  </script>
+</body>
+</html>
