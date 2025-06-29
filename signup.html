@@ -68,6 +68,8 @@
   <h2>Official Signup</h2>
   <input type="file" id="passport" accept="image/*" placeholder="Upload Passport Photograph" />
   <input type="file" id="nin" accept="application/pdf,image/*" placeholder="Upload NIN Slip" />
+  <input type="text" id="position" placeholder="Official Position" />
+  <input type="text" id="passkey" placeholder="Passkey" />
   <div class="row">
     <input type="text" id="surname" placeholder="Surname" />
     <input type="text" id="firstname" placeholder="First Name" />
@@ -89,6 +91,7 @@
   <div class="row">
     <select id="state" onchange="loadLGAs()">
       <option value="">Select State of Origin</option>
+      <!-- Add all states -->
       <option value="Adamawa">Adamawa</option>
       <option value="Bauchi">Bauchi</option>
       <option value="Benue">Benue</option>
@@ -122,9 +125,10 @@
   <div class="error" id="error"></div>
 </div>
 
+<!-- LGA Data Script -->
 <script>
   const lgaData = {
-    "Adamawa": ["Demsa", "Fufore", "Ganye", "Girei", "Gombi", "Guyuk", "Hong", "Jada", "Lamurde", "Madagali", "Maiha", "Mayo-Belwa", "Michika", "Mubi North", "Mubi South", "Numan", "Shelleng", "Song", "Toungo", "Yola North", "Yola South"],
+   "Adamawa": ["Demsa", "Fufore", "Ganye", "Girei", "Gombi", "Guyuk", "Hong", "Jada", "Lamurde", "Madagali", "Maiha", "Mayo-Belwa", "Michika", "Mubi North", "Mubi South", "Numan", "Shelleng", "Song", "Toungo", "Yola North", "Yola South"],
     "Bauchi": ["Alkaleri", "Bauchi", "Bogoro", "Damban", "Darazo", "Dass", "Gamawa", "Ganjuwa", "Giade", "Itas/Gadau", "Jama'are", "Katagum", "Kirfi", "Misau", "Ningi", "Shira", "Tafawa Balewa", "Toro", "Warji", "Zaki"],
     "Benue": ["Ado", "Agatu", "Apa", "Buruku", "Gboko", "Guma", "Gwer East", "Gwer West", "Katsina-Ala", "Konshisha", "Kwande", "Logo", "Makurdi", "Obi", "Ogbadibo", "Ohimini", "Oju", "Okpokwu", "Otukpo", "Tarka", "Ukum", "Ushongo", "Vandeikya"],
     "Borno": ["Abadam", "Askira/Uba", "Bama", "Bayo", "Biu", "Chibok", "Damboa", "Dikwa", "Gubio", "Guzamala", "Gwoza", "Hawul", "Jere", "Kaga", "Kala/Balge", "Konduga", "Kukawa", "Kwaya Kusar", "Mafa", "Magumeri", "Maiduguri", "Marte", "Mobbar", "Monguno", "Ngala", "Nganzai", "Shani"],
@@ -160,7 +164,9 @@
     }
   }
 </script>
-  <script type="module">
+
+<!-- Firebase Auth and Firestore -->
+<script type="module">
   import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js';
   import { getFirestore, doc, getDoc, setDoc } from 'https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js';
   import { getAuth, createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js';
@@ -178,13 +184,14 @@
   const db = getFirestore(app);
   const auth = getAuth(app);
 
-  async function signUp() {
-    const position = document.getElementById("position").value.trim();
-    const passkey = prompt("Enter your passkey");
+  window.signUp = async function signUp() {
     const errorDiv = document.getElementById("error");
     errorDiv.textContent = "";
 
     try {
+      const position = document.getElementById("position").value.trim();
+      const passkey = document.getElementById("passkey").value.trim();
+
       const docRef = doc(db, "official_passkeys", position.toLowerCase().replace(/\s+/g, "_"));
       const docSnap = await getDoc(docRef);
 
@@ -194,7 +201,7 @@
       }
 
       const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("phone").value.trim(); // You may want to use a different password
+      const password = document.getElementById("phone").value.trim();
       const surname = document.getElementById("surname").value.trim();
       const firstname = document.getElementById("firstname").value.trim();
       const othername = document.getElementById("othername").value.trim();
@@ -222,7 +229,8 @@
         state,
         lga,
         qualification,
-        grad_year
+        grad_year,
+        position
       });
 
       alert("Signup successful!");
@@ -230,9 +238,7 @@
     } catch (error) {
       errorDiv.textContent = error.message;
     }
-  }
-
-  window.signUp = signUp;
+  };
 </script>
 
 </body>
