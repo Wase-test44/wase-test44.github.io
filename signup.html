@@ -179,7 +179,7 @@
   const auth = getAuth(app);
 
   async function signUp() {
-    const position = "custom_official";
+    const position = document.getElementById("position").value.trim();
     const passkey = prompt("Enter your passkey");
     const errorDiv = document.getElementById("error");
     errorDiv.textContent = "";
