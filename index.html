@@ -76,10 +76,20 @@
     .submenu li a:hover {
       background-color: #006400;
     }
+/* Allow submenu inside submenu */
+.submenu li.position-relative:hover > .submenu {
+  display: block;
+}
+.submenu .submenu {
+  top: 0;
+  left: 100%;
+  position: absolute;
+}
 
-    .nav-item.position-relative:hover .submenu {
-      display: block;
-    }
+   /* Only show direct submenu of hovered list item */
+li.position-relative:hover > .submenu {
+  display: block;
+}
 
     footer {
       background-color: #002d00;
@@ -108,16 +118,68 @@
           <a href="#" class="nav-link text-light">Home</a>
         </li>
 
-        <!-- About with Hoverable Submenu -->
-        <li class="nav-item me-4 position-relative">
-          <a href="#" class="nav-link text-light">About</a>
-          <ul class="submenu">
-            <li><a href="#">Organisation</a></li>
-            <li><a href="#">Aims and Objectives</a></li>
-            <li><a href="#">Concept Note</a></li>
-            <li><a href="#">Activities</a></li>
+       <!-- About with Nested Organisation Submenus -->
+<li class="nav-item me-4 position-relative">
+  <a href="#" class="nav-link text-light">About</a>
+  <ul class="submenu">
+    <!-- Organisation with its own submenu -->
+    <li class="position-relative">
+      <a href="#">Organisation</a>
+      <ul class="submenu" style="left: 100%; top: 0;">
+        <li><a href="#">Organisational History</a></li>
+        <li><a href="#">Chairman</a></li>
+        <li><a href="#">Secretary</a></li>
+
+        <!-- Directorates with its own nested submenu -->
+        <li class="position-relative">
+          <a href="#">Directorates</a>
+          <ul class="submenu" style="left: 100%; top: 0;">
+            <li><a href="#">Finance</a></li>
+            <li><a href="#">Research & Documentation</a></li>
+            <li><a href="#">Environmental Management</a></li>
+            <li><a href="#">Public Affairs</a></li>
+            <li><a href="#">Sports</a></li>
+            <li><a href="#">Culture & Tourism</a></li>
           </ul>
         </li>
+
+        <!-- Coordinators with its own nested submenu -->
+        <li class="position-relative">
+          <a href="#">Coordinators</a>
+          <ul class="submenu" style="left: 100%; top: 0;">
+            
+<li><a href="#">Adamawa</a></li>
+<li><a href="#">Bauchi</a></li>
+<li><a href="#">Benue</a></li>
+<li><a href="#">Borno</a></li>
+<li><a href="#">FCT</a></li>
+<li><a href="#">Gombe</a></li>
+<li><a href="#">Jigawa</a></li>
+<li><a href="#">Kaduna</a></li>
+<li><a href="#">Kano</a></li>
+<li><a href="#">Katsina</a></li>
+<li><a href="#">Kebbi</a></li>
+<li><a href="#">Kogi</a></li>
+<li><a href="#">Kwara</a></li>
+<li><a href="#">Nassarawa</a></li>
+<li><a href="#">Niger</a></li>
+<li><a href="#">Plateau</a></li>
+<li><a href="#">Sokoto</a></li>
+<li><a href="#">Taraba</a></li>
+<li><a href="#">Yobe</a></li>
+<li><a href="#">Zamfara</a></li>
+
+          </ul>
+        </li>
+      </ul>
+    </li>
+
+    <li><a href="#">Aims and Objectives</a></li>
+    <li><a href="#">Concept Note</a></li>
+    <li><a href="#">Activities</a></li>
+  </ul>
+</li>
+
 
         <li class="nav-item me-4">
           <a href="#" class="nav-link text-light">Career</a>
