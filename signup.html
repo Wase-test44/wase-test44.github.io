@@ -85,40 +85,44 @@
   const auth = getAuth(app);
 
   async function signUp() {
-    const position = document.getElementById('position').value.trim();
-    const passkey = document.getElementById('passkey').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const password = document.getElementById('password').value.trim();
-    const errorDiv = document.getElementById('error');
-    errorDiv.textContent = '';
+  const position = document.getElementById('position').value.trim();
+  const passkey = document.getElementById('passkey').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value.trim();
+  const errorDiv = document.getElementById('error');
+  errorDiv.textContent = '';
 
-    if (!position || !passkey || !email || !password) {
-      errorDiv.textContent = "All fields are required.";
+  if (!position || !passkey || !email || !password) {
+    errorDiv.textContent = "All fields are required.";
+    return;
+  }
+
+  try {
+    const docRef = doc(db, "official_passkeys", position.toLowerCase().replace(/\s+/g, '_'));
+    const docSnap = await getDoc(docRef);
+
+    if (!docSnap.exists()) {
+      errorDiv.textContent = "Position not recognized.";
       return;
     }
 
-    try {
-      const docRef = doc(db, "official_passkeys", position.toLowerCase().replace(/\s+/g, '_'));
-      const docSnap = await getDoc(docRef);
-
-      if (!docSnap.exists()) {
-        errorDiv.textContent = "Position not recognized.";
-        return;
-      }
-
-      const validPasskey = docSnap.data().passkey;
-      if (validPasskey !== passkey) {
-        errorDiv.textContent = "Incorrect passkey.";
-        return;
-      }
-
-      await createUserWithEmailAndPassword(auth, email, password);
-      alert("Signup successful! You can now log in.");
-      window.location.href = "login.html";
-    } catch (error) {
-      errorDiv.textContent = error.message;
+    const validPasskey = docSnap.data().passkey;
+    if (validPasskey !== passkey) {
+      errorDiv.textContent = "Incorrect passkey.";
+      return;
     }
+
+    await createUserWithEmailAndPassword(auth, email, password);
+    alert("Signup successful! You can now log in.");
+    window.location.href = "login.html";
+  } catch (error) {
+    errorDiv.textContent = error.message;
   }
+}
+
+// 👇 Add this line to expose the function to the button click
+window.signUp = signUp;
+
 </script>
 
 </body>
