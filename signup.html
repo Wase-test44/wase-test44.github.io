@@ -160,5 +160,80 @@
     }
   }
 </script>
+  <script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js';
+  import { getFirestore, doc, getDoc, setDoc } from 'https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js';
+  import { getAuth, createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js';
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDWNLns4skz3zOyvYxIssiR0B3QSGN1li8",
+    authDomain: "arewa-progressive-eagle.firebaseapp.com",
+    projectId: "arewa-progressive-eagle",
+    storageBucket: "arewa-progressive-eagle.appspot.com",
+    messagingSenderId: "1002389077766",
+    appId: "1:1002389077766:web:9af458f75b345588dea887"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const auth = getAuth(app);
+
+  async function signUp() {
+    const position = "custom_official";
+    const passkey = prompt("Enter your passkey");
+    const errorDiv = document.getElementById("error");
+    errorDiv.textContent = "";
+
+    try {
+      const docRef = doc(db, "official_passkeys", position.toLowerCase().replace(/\s+/g, "_"));
+      const docSnap = await getDoc(docRef);
+
+      if (!docSnap.exists() || docSnap.data().passkey !== passkey) {
+        errorDiv.textContent = "Invalid or unauthorized passkey.";
+        return;
+      }
+
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("phone").value.trim(); // You may want to use a different password
+      const surname = document.getElementById("surname").value.trim();
+      const firstname = document.getElementById("firstname").value.trim();
+      const othername = document.getElementById("othername").value.trim();
+      const dob = document.getElementById("dob").value;
+      const gender = document.getElementById("gender").value;
+      const phone = document.getElementById("phone").value.trim();
+      const address = document.getElementById("address").value.trim();
+      const state = document.getElementById("state").value;
+      const lga = document.getElementById("lga").value;
+      const qualification = document.getElementById("qualification").value.trim();
+      const grad_year = document.getElementById("grad_year").value.trim();
+
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const userId = userCredential.user.uid;
+
+      await setDoc(doc(db, "official_profiles", userId), {
+        surname,
+        firstname,
+        othername,
+        dob,
+        gender,
+        email,
+        phone,
+        address,
+        state,
+        lga,
+        qualification,
+        grad_year
+      });
+
+      alert("Signup successful!");
+      window.location.href = "login.html";
+    } catch (error) {
+      errorDiv.textContent = error.message;
+    }
+  }
+
+  window.signUp = signUp;
+</script>
+
 </body>
 </html>
