@@ -61,6 +61,7 @@
   <h2>Official Signup</h2>
   <form id="signupForm">
     <input type="file" id="passport" accept="image/*" placeholder="Upload Passport Photograph" required />
+    <img id="passportPreview" src="#" alt="Passport Preview" style="display:none; max-width:100px; margin-top:10px;" />
     <input type="file" id="nin" accept="application/pdf,image/*" placeholder="Upload NIN Slip" required />
     <input type="text" id="position" placeholder="Official Position (e.g. Secretary)" required />
     <input type="password" id="passkeyInput" placeholder="Enter Passkey" required />
@@ -160,6 +161,7 @@
 </script>
 
 <script type="module">
+  import { getStorage, ref, uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/11.9.1/firebase-storage.js';
   import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js';
   import { getFirestore, doc, getDoc, setDoc } from 'https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js';
   import { getAuth, createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js';
@@ -176,6 +178,7 @@
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
   const auth = getAuth(app);
+  const storage = getStorage(app);
 
   async function signUp() {
   const position = document.getElementById("position").value.trim();
@@ -201,6 +204,24 @@
     }
 
     console.log("✅ Passkey validated.");
+    await setDoc(doc(db, "official_profiles", userId), {
+  position,
+  surname,
+  firstname,
+  othername,
+  dob,
+  gender,
+  email,
+  phone,
+  address,
+  state,
+  lga,
+  qualification,
+  grad_year,
+  passportURL,
+  ninURL
+});
+
 
     const email = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value.trim();
