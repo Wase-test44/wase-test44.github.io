@@ -411,28 +411,40 @@ li.position-relative:hover > .submenu {
   <div class="row g-4 align-items-stretch">
 
     
-    <!-- Events Column -->
-    <div class="col-lg-6 col-xl-4">
-      <div class="card shadow-sm border-0 h-100">
-        <div class="card-header bg-success text-white text-center fw-bold">
-          Upcoming Events
-        </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <strong>July 10, 2025:</strong> APEM Tree Planting Drive - Katsina State
-          </li>
-          <li class="list-group-item">
-            <strong>August 2, 2025:</strong> AREWA Clean-Up Campaign - Bauchi
-          </li>
-          <li class="list-group-item">
-            <strong>September 5, 2025:</strong> Leadership Summit for Northern Youth
-          </li>
-        </ul>
-        <div class="card-footer text-center bg-light">
-          <a href="#" class="btn btn-sm btn-outline-success">View Full Calendar</a>
-        </div>
-      </div>
+   <!-- Events Column -->
+<div class="col-lg-6 col-xl-4">
+  <div class="card shadow-sm border-0 h-100">
+    <div class="card-header bg-success text-white text-center fw-bold">
+      Upcoming Events
     </div>
+    <ul id="eventsList" class="list-group list-group-flush">
+      <!-- Events will be injected here -->
+    </ul>
+    <div class="card-footer text-center bg-light">
+      <a href="#" class="btn btn-sm btn-outline-success">View Full Calendar</a>
+    </div>
+  </div>
+</div>
+
+<!-- Script to Populate Events -->
+<script>
+  const events = [
+    { date: "July 10, 2025", title: "APEM Tree Planting Drive - Katsina State" },
+    { date: "August 2, 2025", title: "AREWA Clean-Up Campaign - Bauchi" },
+    { date: "September 5, 2025", title: "Leadership Summit for Northern Youth" },
+    // Add more events here
+  ];
+
+  const eventsList = document.getElementById("eventsList");
+
+  events.forEach(event => {
+    const li = document.createElement("li");
+    li.className = "list-group-item";
+    li.innerHTML = `<strong>${event.date}:</strong> ${event.title}`;
+    eventsList.appendChild(li);
+  });
+</script>
+
 
 <!-- Carousel Column -->
     <div class="col-lg-6 col-xl-4">
@@ -488,23 +500,62 @@ li.position-relative:hover > .submenu {
     </div>
 
     
-    <!-- News Column -->
-    <div class="col-lg-12 col-xl-4">
-      <div class="card shadow-sm border-0 h-100">
-        <div class="card-header bg-warning text-dark text-center fw-bold">
-          News & Updates
-        </div>
-        <div class="card-body">
-          <h6 class="fw-bold">🎉 10,000 Oil Palm Trees Flag-Off in Katsina</h6>
-          <p class="small text-muted">June 27, 2025</p>
-          <p class="card-text">APEM launched a major environmental initiative with dignitaries and traditional leaders present. <a href="#">Read more</a></p>
-          <hr>
-          <h6 class="fw-bold">📰 APEM Featured in Blueprint Newspaper</h6>
-          <p class="small text-muted">June 18, 2025</p>
-          <p class="card-text">Our work in desertification control and youth mobilization has earned national recognition. <a href="#">Learn more</a></p>
-        </div>
+   <!-- News Column -->
+<div class="col-lg-12 col-xl-4">
+  <div class="card shadow-sm border-0 h-100">
+    <div class="card-header bg-warning text-dark text-center fw-bold">
+      News & Updates
+    </div>
+    <div class="card-body" style="height: 300px; overflow: hidden; position: relative;">
+      <div id="newsTicker" class="position-absolute top-0 start-0 w-100">
+        <!-- News will be injected here -->
       </div>
     </div>
+  </div>
+</div>
+
+<!-- News Ticker Script -->
+<script>
+  const newsItems = [
+    {
+      title: "🎉 10,000 Oil Palm Trees Flag-Off in Katsina",
+      date: "June 27, 2025",
+      summary: "APEM launched a major environmental initiative with dignitaries and traditional leaders present.",
+      link: "news1.html" // You can replace this with actual file
+    },
+    {
+      title: "📰 APEM Featured in Blueprint Newspaper",
+      date: "June 18, 2025",
+      summary: "Our work in desertification control and youth mobilization has earned national recognition.",
+      link: "news2.html"
+    },
+    // Add more news items here...
+  ];
+
+  const ticker = document.getElementById("newsTicker");
+
+  newsItems.forEach(item => {
+    const div = document.createElement("div");
+    div.className = "mb-4";
+    div.innerHTML = `
+      <h6 class="fw-bold">${item.title}</h6>
+      <p class="small text-muted mb-1">${item.date}</p>
+      <p class="card-text mb-1">${item.summary} <a href="${item.link}" target="_blank">Read more</a></p>
+      <hr>
+    `;
+    ticker.appendChild(div);
+  });
+
+  // Animate scroll upward
+  let offset = 0;
+  setInterval(() => {
+    offset -= 1;
+    ticker.style.transform = `translateY(${offset}px)`;
+    if (Math.abs(offset) > ticker.scrollHeight - 300) {
+      offset = 0;
+    }
+  }, 50);
+</script>
 
   </div>
 </section>
