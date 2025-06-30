@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Official Signup</title>
   <style>
     body {
@@ -13,20 +13,17 @@
       justify-content: center;
       padding: 40px;
     }
-
     .signup-box {
       background: #fff;
       padding: 30px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
       border-radius: 10px;
       width: 600px;
     }
-
     .signup-box h2 {
       text-align: center;
       margin-bottom: 20px;
     }
-
     input, select {
       width: 100%;
       padding: 10px;
@@ -34,16 +31,13 @@
       border: 1px solid #ccc;
       border-radius: 5px;
     }
-
     .row {
       display: flex;
       gap: 10px;
     }
-
     .row > * {
       flex: 1;
     }
-
     button {
       width: 100%;
       padding: 10px;
@@ -54,7 +48,6 @@
       border-radius: 5px;
       cursor: pointer;
     }
-
     .error {
       color: red;
       font-size: 0.9em;
@@ -68,8 +61,8 @@
   <h2>Official Signup</h2>
   <input type="file" id="passport" accept="image/*" placeholder="Upload Passport Photograph" />
   <input type="file" id="nin" accept="application/pdf,image/*" placeholder="Upload NIN Slip" />
-  <input type="text" id="position" placeholder="Official Position" />
-  <input type="text" id="passkey" placeholder="Passkey" />
+  <input type="text" id="position" placeholder="Official Position (e.g. Secretary)" />
+  <input type="password" id="passkeyInput" placeholder="Enter Passkey" />
   <div class="row">
     <input type="text" id="surname" placeholder="Surname" />
     <input type="text" id="firstname" placeholder="First Name" />
@@ -87,31 +80,12 @@
     <input type="email" id="email" placeholder="Email Address" />
     <input type="tel" id="phone" placeholder="Phone Number" />
   </div>
+  <input type="password" id="password" placeholder="Create a Password" />
   <input type="text" id="address" placeholder="Contact Address" />
   <div class="row">
     <select id="state" onchange="loadLGAs()">
       <option value="">Select State of Origin</option>
-      <!-- Add all states -->
-      <option value="Adamawa">Adamawa</option>
-      <option value="Bauchi">Bauchi</option>
-      <option value="Benue">Benue</option>
-      <option value="Borno">Borno</option>
-      <option value="FCT">FCT</option>
-      <option value="Gombe">Gombe</option>
-      <option value="Jigawa">Jigawa</option>
-      <option value="Kaduna">Kaduna</option>
-      <option value="Kano">Kano</option>
-      <option value="Katsina">Katsina</option>
-      <option value="Kebbi">Kebbi</option>
-      <option value="Kogi">Kogi</option>
-      <option value="Kwara">Kwara</option>
-      <option value="Nasarawa">Nasarawa</option>
-      <option value="Niger">Niger</option>
-      <option value="Plateau">Plateau</option>
-      <option value="Sokoto">Sokoto</option>
-      <option value="Taraba">Taraba</option>
-      <option value="Yobe">Yobe</option>
-      <option value="Zamfara">Zamfara</option>
+      <!-- Your state options here -->
     </select>
     <select id="lga">
       <option value="">Select LGA of Origin</option>
@@ -125,7 +99,6 @@
   <div class="error" id="error"></div>
 </div>
 
-<!-- LGA Data Script -->
 <script>
   const lgaData = {
    "Adamawa": ["Demsa", "Fufore", "Ganye", "Girei", "Gombi", "Guyuk", "Hong", "Jada", "Lamurde", "Madagali", "Maiha", "Mayo-Belwa", "Michika", "Mubi North", "Mubi South", "Numan", "Shelleng", "Song", "Toungo", "Yola North", "Yola South"],
@@ -149,7 +122,6 @@
     "Yobe": ["Bade", "Bursari", "Damaturu", "Fika", "Fune", "Geidam", "Gujba", "Gulani", "Jakusko", "Karasuwa", "Machina", "Nangere", "Nguru", "Potiskum", "Tarmuwa", "Yunusari", "Yusufari"],
     "Zamfara": ["Anka", "Bakura", "Birnin Magaji", "Bukkuyum", "Bungudu", "Gummi", "Gusau", "Kaura Namoda", "Maradun", "Maru", "Shinkafi", "Talata Mafara", "Chafe", "Zurmi"]
   };
-
   function loadLGAs() {
     const state = document.getElementById('state').value;
     const lgaSelect = document.getElementById('lga');
@@ -165,7 +137,6 @@
   }
 </script>
 
-<!-- Firebase Auth and Firestore -->
 <script type="module">
   import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js';
   import { getFirestore, doc, getDoc, setDoc } from 'https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js';
@@ -184,14 +155,13 @@
   const db = getFirestore(app);
   const auth = getAuth(app);
 
-  window.signUp = async function signUp() {
+  async function signUp() {
+    const position = document.getElementById("position").value.trim();
+    const passkey = document.getElementById("passkeyInput").value.trim();
     const errorDiv = document.getElementById("error");
     errorDiv.textContent = "";
 
     try {
-      const position = document.getElementById("position").value.trim();
-      const passkey = document.getElementById("passkey").value.trim();
-
       const docRef = doc(db, "official_passkeys", position.toLowerCase().replace(/\s+/g, "_"));
       const docSnap = await getDoc(docRef);
 
@@ -201,7 +171,7 @@
       }
 
       const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("phone").value.trim();
+      const password = document.getElementById("password").value.trim();
       const surname = document.getElementById("surname").value.trim();
       const firstname = document.getElementById("firstname").value.trim();
       const othername = document.getElementById("othername").value.trim();
@@ -218,6 +188,7 @@
       const userId = userCredential.user.uid;
 
       await setDoc(doc(db, "official_profiles", userId), {
+        position,
         surname,
         firstname,
         othername,
@@ -229,8 +200,7 @@
         state,
         lga,
         qualification,
-        grad_year,
-        position
+        grad_year
       });
 
       alert("Signup successful!");
@@ -238,7 +208,9 @@
     } catch (error) {
       errorDiv.textContent = error.message;
     }
-  };
+  }
+
+  window.signUp = signUp;
 </script>
 
 </body>
