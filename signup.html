@@ -59,67 +59,92 @@
 
 <div class="signup-box">
   <h2>Official Signup</h2>
-  <input type="file" id="passport" accept="image/*" placeholder="Upload Passport Photograph" />
-  <input type="file" id="nin" accept="application/pdf,image/*" placeholder="Upload NIN Slip" />
-  <input type="text" id="position" placeholder="Official Position (e.g. Secretary)" />
-  <input type="password" id="passkeyInput" placeholder="Enter Passkey" />
-  <div class="row">
-    <input type="text" id="surname" placeholder="Surname" />
-    <input type="text" id="firstname" placeholder="First Name" />
-    <input type="text" id="othername" placeholder="Other Name" />
-  </div>
-  <div class="row">
-    <input type="date" id="dob" min="1980-01-01" placeholder="Date of Birth" />
-    <select id="gender">
-      <option value="">Select Gender</option>
-      <option value="Male">Male</option>
-      <option value="Female">Female</option>
-    </select>
-  </div>
-  <div class="row">
-    <input type="email" id="email" placeholder="Email Address" />
-    <input type="tel" id="phone" placeholder="Phone Number" />
-  </div>
-  <input type="password" id="password" placeholder="Create a Password" />
-  <input type="text" id="address" placeholder="Contact Address" />
-  <div class="row">
-    <select id="state" onchange="loadLGAs()">
-      <option value="">Select State of Origin</option>
-      <option value="Adamawa">Adamawa</option>
-      <option value="Bauchi">Bauchi</option>
-      <option value="Benue">Benue</option>
-      <option value="Borno">Borno</option>
-      <option value="FCT">FCT</option>
-      <option value="Gombe">Gombe</option>
-      <option value="Jigawa">Jigawa</option>
-      <option value="Kaduna">Kaduna</option>
-      <option value="Kano">Kano</option>
-      <option value="Katsina">Katsina</option>
-      <option value="Kebbi">Kebbi</option>
-      <option value="Kogi">Kogi</option>
-      <option value="Kwara">Kwara</option>
-      <option value="Nasarawa">Nasarawa</option>
-      <option value="Niger">Niger</option>
-      <option value="Plateau">Plateau</option>
-      <option value="Sokoto">Sokoto</option>
-      <option value="Taraba">Taraba</option>
-      <option value="Yobe">Yobe</option>
-      <option value="Zamfara">Zamfara</option>
-    </select>
-    <select id="lga">
-      <option value="">Select LGA of Origin</option>
-    </select>
-  </div>
-  <div class="row">
-    <input type="text" id="qualification" placeholder="Highest Academic Qualification" />
-    <input type="text" id="grad_year" placeholder="Year Obtained" />
-  </div>
-  <button onclick="signUp()">Sign Up</button>
-  <div class="error" id="error"></div>
+  <form id="signupForm">
+    <input type="file" id="passport" accept="image/*" placeholder="Upload Passport Photograph" required />
+    <input type="file" id="nin" accept="application/pdf,image/*" placeholder="Upload NIN Slip" required />
+    <input type="text" id="position" placeholder="Official Position (e.g. Secretary)" required />
+    <input type="password" id="passkeyInput" placeholder="Enter Passkey" required />
+    <div class="row">
+      <input type="text" id="surname" placeholder="Surname" required />
+      <input type="text" id="firstname" placeholder="First Name" required />
+      <input type="text" id="othername" placeholder="Other Name" />
+    </div>
+    <div class="row">
+      <input type="date" id="dob" min="1980-01-01" required />
+      <select id="gender" required>
+        <option value="">Select Gender</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+      </select>
+    </div>
+    <div class="row">
+      <input type="email" id="email" placeholder="Email Address" required />
+      <input type="tel" id="phone" placeholder="Phone Number" required />
+    </div>
+    <input type="password" id="password" placeholder="Create a Password" required />
+    <input type="text" id="address" placeholder="Contact Address" required />
+    <div class="row">
+      <select id="state" onchange="loadLGAs()" required>
+        <option value="">Select State of Origin</option>
+        <option value="Adamawa">Adamawa</option>
+        <option value="Bauchi">Bauchi</option>
+        <option value="Benue">Benue</option>
+        <option value="Borno">Borno</option>
+        <option value="FCT">FCT</option>
+        <option value="Gombe">Gombe</option>
+        <option value="Jigawa">Jigawa</option>
+        <option value="Kaduna">Kaduna</option>
+        <option value="Kano">Kano</option>
+        <option value="Katsina">Katsina</option>
+        <option value="Kebbi">Kebbi</option>
+        <option value="Kogi">Kogi</option>
+        <option value="Kwara">Kwara</option>
+        <option value="Nasarawa">Nasarawa</option>
+        <option value="Niger">Niger</option>
+        <option value="Plateau">Plateau</option>
+        <option value="Sokoto">Sokoto</option>
+        <option value="Taraba">Taraba</option>
+        <option value="Yobe">Yobe</option>
+        <option value="Zamfara">Zamfara</option>
+      </select>
+      <select id="lga" required>
+        <option value="">Select LGA of Origin</option>
+      </select>
+    </div>
+    <div class="row">
+      <input type="text" id="qualification" placeholder="Highest Academic Qualification" required />
+      <input type="text" id="grad_year" placeholder="Year Obtained" required />
+    </div>
+    <button type="submit">Sign Up</button>
+    <div class="error" id="error"></div>
+  </form>
 </div>
 
-<script src="https://arewa-data.web.app/lga-data.js"></script>
 <script>
+  const lgaData = {
+    Adamawa: ["Demsa", "Fufore", "Ganye", "Girei", "Gombi", "Guyuk", "Hong", "Jada", "Lamurde", "Madagali", "Maiha", "Mayo-Belwa", "Michika", "Mubi North", "Mubi South", "Numan", "Shelleng", "Song", "Toungo", "Yola North", "Yola South"],
+    Bauchi: ["Alkaleri", "Bauchi", "Bogoro", "Damban", "Darazo", "Dass", "Gamawa", "Ganjuwa", "Giade", "Itas/Gadau", "Jama'are", "Katagum", "Kirfi", "Misau", "Ningi", "Shira", "Tafawa Balewa", "Toro", "Warji", "Zaki"],
+    Benue: ["Ado", "Agatu", "Apa", "Buruku", "Gboko", "Guma", "Gwer East", "Gwer West", "Katsina-Ala", "Konshisha", "Kwande", "Logo", "Makurdi", "Obi", "Ogbadibo", "Ohimini", "Oju", "Okpokwu", "Otukpo", "Tarka", "Ukum", "Ushongo", "Vandeikya"],
+    Borno: ["Abadam", "Askira/Uba", "Bama", "Bayo", "Biu", "Chibok", "Damboa", "Dikwa", "Gubio", "Guzamala", "Gwoza", "Hawul", "Jere", "Kaga", "Kala/Balge", "Konduga", "Kukawa", "Kwaya Kusar", "Mafa", "Magumeri", "Maiduguri", "Marte", "Mobbar", "Monguno", "Ngala", "Nganzai", "Shani"],
+    FCT: ["Abaji", "Bwari", "Gwagwalada", "Kuje", "Kwali", "Municipal"],
+    Gombe: ["Akko", "Balanga", "Billiri", "Dukku", "Funakaye", "Gombe", "Kaltungo", "Kwami", "Nafada", "Shongom", "Yamaltu/Deba"]
+  "Jigawa": ["Auyo", "Babura", "Biriniwa", "Birnin Kudu", "Buji", "Dutse", "Gagarawa", "Garki", "Gumel", "Guri", "Gwaram", "Gwiwa", "Hadejia", "Jahun", "Kafin Hausa", "Kaugama", "Kazaure", "Kiri Kasama", "Kiyawa", "Maigatari", "Malam Madori", "Miga", "Ringim", "Roni", "Sule Tankarkar", "Taura", "Yankwashi"],
+    "Kaduna": ["Birnin Gwari", "Chikun", "Giwa", "Igabi", "Ikara", "Jaba", "Jema'a", "Kachia", "Kaduna North", "Kaduna South", "Kagarko", "Kajuru", "Kaura", "Kauru", "Kubau", "Kudan", "Lere", "Makarfi", "Sabon Gari", "Sanga", "Soba", "Zangon Kataf", "Zaria"],
+    "Kano": ["Ajingi", "Albasu", "Bagwai", "Bebeji", "Bichi", "Bunkure", "Dala", "Dambatta", "Dawakin Kudu", "Dawakin Tofa", "Doguwa", "Fagge", "Gabasawa", "Garko", "Garun Mallam", "Gaya", "Gezawa", "Gwale", "Gwarzo", "Kabo", "Kano Municipal", "Karaye", "Kibiya", "Kiru", "Kumbotso", "Kunchi", "Kura", "Madobi", "Makoda", "Minjibir", "Nasarawa", "Rano", "Rimin Gado", "Rogo", "Shanono", "Sumaila", "Takai", "Tarauni", "Tofa", "Tsanyawa", "Tudun Wada", "Ungogo", "Warawa", "Wudil"],
+    "Katsina": ["Bakori", "Batagarawa", "Batsari", "Baure", "Bindawa", "Charanchi", "Dandume", "Danja", "Dan Musa", "Daura", "Dutsi", "Dutsin-Ma", "Faskari", "Funtua", "Ingawa", "Jibia", "Kafur", "Kaita", "Kankara", "Kankia", "Katsina", "Kurfi", "Kusada", "Mai'Adua", "Malumfashi", "Mani", "Mashi", "Matazu", "Musawa", "Rimi", "Sabuwa", "Safana", "Sandamu", "Zango"],
+    "Kebbi": ["Aleiro", "Arewa Dandi", "Argungu", "Augie", "Bagudo", "Birnin Kebbi", "Bunza", "Dandi", "Fakai", "Gwandu", "Jega", "Kalgo", "Koko/Besse", "Maiyama", "Ngaski", "Sakaba", "Shanga", "Suru", "Wasagu/Danko", "Yauri", "Zuru"],
+    "Kogi": ["Adavi", "Ajaokuta", "Ankpa", "Bassa", "Dekina", "Ibaji", "Idah", "Igalamela-Odolu", "Ijumu", "Kabba/Bunu", "Kogi", "Lokoja", "Mopa-Muro", "Ofu", "Ogori/Magongo", "Okehi", "Okene", "Olamaboro", "Omala", "Yagba East", "Yagba West"],
+    "Kwara": ["Asa", "Baruten", "Edu", "Ekiti", "Ifelodun", "Ilorin East", "Ilorin South", "Ilorin West", "Irepodun", "Isin", "Kaiama", "Moro", "Offa", "Oke Ero", "Oyun", "Pategi"],
+    "Nasarawa": ["Akwanga", "Awe", "Doma", "Karu", "Keana", "Keffi", "Kokona", "Lafia", "Nasarawa", "Nasarawa Eggon", "Obi", "Toto", "Wamba"],
+    "Niger": ["Agaie", "Agwara", "Bida", "Borgu", "Bosso", "Chanchaga", "Edati", "Gbako", "Gurara", "Katcha", "Kontagora", "Lapai", "Lavun", "Magama", "Mariga", "Mashegu", "Mokwa", "Munya", "Paikoro", "Rafi", "Rijau", "Shiroro", "Suleja", "Tafa", "Wushishi"],
+    "Plateau": ["Barkin Ladi", "Bassa", "Bokkos", "Jos East", "Jos North", "Jos South", "Kanam", "Kanke", "Langtang North", "Langtang South", "Mangu", "Mikang", "Pankshin", "Qua'an Pan", "Riyom", "Shendam", "Wase"],
+    "Sokoto": ["Binji", "Bodinga", "Dange Shuni", "Gada", "Goronyo", "Gudu", "Gwadabawa", "Illela", "Isa", "Kebbe", "Kware", "Rabah", "Sabon Birni", "Shagari", "Silame", "Sokoto North", "Sokoto South", "Tambuwal", "Tangaza", "Tureta", "Wamako", "Wurno", "Yabo"],
+    "Taraba": ["Ardo-Kola", "Bali", "Donga", "Gashaka", "Gassol", "Ibi", "Jalingo", "Karim-Lamido", "Kumi", "Lau", "Sardauna", "Takum", "Ussa", "Wukari", "Yorro", "Zing"],
+    "Yobe": ["Bade", "Bursari", "Damaturu", "Fika", "Fune", "Geidam", "Gujba", "Gulani", "Jakusko", "Karasuwa", "Machina", "Nangere", "Nguru", "Potiskum", "Tarmuwa", "Yunusari", "Yusufari"],
+    "Zamfara": ["Anka", "Bakura", "Birnin Magaji", "Bukkuyum", "Bungudu", "Gummi", "Gusau", "Kaura Namoda", "Maradun", "Maru", "Shinkafi", "Talata Mafara", "Chafe", "Zurmi"]
+  };
+
+
   function loadLGAs() {
     const state = document.getElementById('state').value;
     const lgaSelect = document.getElementById('lga');
