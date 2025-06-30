@@ -1,0 +1,52 @@
+<!-- Gallery Section -->
+<section class="container py-5">
+  <h2 class="text-center text-dark fw-bold mb-4">APEM Photo Gallery</h2>
+  <div class="row g-4" id="photoGallery">
+    <div class="col-sm-6 col-md-4 col-lg-3">
+      <div class="gallery-img fade-in">
+        <img src="photos/event1.jpg" class="img-fluid rounded shadow" alt="Event 1" />
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-4 col-lg-3">
+      <div class="gallery-img fade-in">
+        <img src="photos/event2.jpg" class="img-fluid rounded shadow" alt="Event 2" />
+      </div>
+    </div>
+    <!-- Add more blocks like above -->
+  </div>
+</section>
+
+<!-- Gallery Styles -->
+<style>
+  .gallery-img {
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.3s ease-in-out;
+    border-radius: 15px;
+  }
+
+  .gallery-img img {
+    width: 100%;
+    transition: transform 0.5s ease;
+    border-radius: 15px;
+  }
+
+  .gallery-img:hover img {
+    transform: scale(1.1);
+  }
+
+  .fade-in {
+    animation: fadeInUp 1.2s ease both;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
