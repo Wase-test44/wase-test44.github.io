@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en">f
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -178,59 +178,74 @@
   const auth = getAuth(app);
 
   async function signUp() {
-    const position = document.getElementById("position").value.trim();
-    const passkey = document.getElementById("passkeyInput").value.trim();
-    const errorDiv = document.getElementById("error");
-    errorDiv.textContent = "";
+  const position = document.getElementById("position").value.trim();
+  const passkey = document.getElementById("passkeyInput").value.trim();
+  const errorDiv = document.getElementById("error");
+  errorDiv.textContent = "";
 
-    try {
-      const docRef = doc(db, "official_passkeys", position.toLowerCase().replace(/\s+/g, "_"));
-      const docSnap = await getDoc(docRef);
+  try {
+    console.log("🔑 Checking passkey for position:", position);
+    const docRef = doc(db, "official_passkeys", position.toLowerCase().replace(/\s+/g, "_"));
+    const docSnap = await getDoc(docRef);
 
-      if (!docSnap.exists() || docSnap.data().passkey !== passkey) {
-        errorDiv.textContent = "Invalid or unauthorized passkey.";
-        return;
-      }
-
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("password").value.trim();
-      const surname = document.getElementById("surname").value.trim();
-      const firstname = document.getElementById("firstname").value.trim();
-      const othername = document.getElementById("othername").value.trim();
-      const dob = document.getElementById("dob").value;
-      const gender = document.getElementById("gender").value;
-      const phone = document.getElementById("phone").value.trim();
-      const address = document.getElementById("address").value.trim();
-      const state = document.getElementById("state").value;
-      const lga = document.getElementById("lga").value;
-      const qualification = document.getElementById("qualification").value.trim();
-      const grad_year = document.getElementById("grad_year").value.trim();
-
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      const userId = userCredential.user.uid;
-
-      await setDoc(doc(db, "official_profiles", userId), {
-        position,
-        surname,
-        firstname,
-        othername,
-        dob,
-        gender,
-        email,
-        phone,
-        address,
-        state,
-        lga,
-        qualification,
-        grad_year
-      });
-
-      alert("Signup successful!");
-      window.location.href = "login.html";
-    } catch (error) {
-      errorDiv.textContent = error.message;
+    if (!docSnap.exists()) {
+      console.error("❌ Passkey document not found.");
+      errorDiv.textContent = "Invalid or unauthorized passkey.";
+      return;
     }
+
+    if (docSnap.data().passkey !== passkey) {
+      console.error("❌ Passkey mismatch.");
+      errorDiv.textContent = "Invalid or unauthorized passkey.";
+      return;
+    }
+
+    console.log("✅ Passkey validated.");
+
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+    const surname = document.getElementById("surname").value.trim();
+    const firstname = document.getElementById("firstname").value.trim();
+    const othername = document.getElementById("othername").value.trim();
+    const dob = document.getElementById("dob").value;
+    const gender = document.getElementById("gender").value;
+    const phone = document.getElementById("phone").value.trim();
+    const address = document.getElementById("address").value.trim();
+    const state = document.getElementById("state").value;
+    const lga = document.getElementById("lga").value;
+    const qualification = document.getElementById("qualification").value.trim();
+    const grad_year = document.getElementById("grad_year").value.trim();
+
+    console.log("📧 Creating user with email:", email);
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    const userId = userCredential.user.uid;
+    console.log("👤 Firebase user created. UID:", userId);
+
+    console.log("📄 Storing user profile in Firestore...");
+    await setDoc(doc(db, "official_profiles", userId), {
+      position,
+      surname,
+      firstname,
+      othername,
+      dob,
+      gender,
+      email,
+      phone,
+      address,
+      state,
+      lga,
+      qualification,
+      grad_year
+    });
+
+    console.log("✅ User profile saved successfully.");
+    alert("Signup successful!");
+    window.location.href = "login.html";
+  } catch (error) {
+    console.error("❌ Error during signup:", error);
+    errorDiv.textContent = error.message;
   }
+}
 
   window.signUp = signUp;
 </script>
