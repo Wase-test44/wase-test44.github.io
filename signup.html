@@ -234,6 +234,12 @@
 
   window.signUp = signUp;
 </script>
+<script>
+  document.getElementById("signupForm").addEventListener("submit", function(e) {
+    e.preventDefault(); // Prevent page refresh
+    signUp(); // Call your async signUp() function
+  });
+</script>
 
 </body>
 </html>
