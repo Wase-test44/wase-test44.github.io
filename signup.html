@@ -102,7 +102,7 @@
 <img id="passportPreview" src="#" alt="Passport Preview" 
 style="display:none; max-width:100px; margin: 10px auto; display: block;" />
 
-<label for="nin"><strong>Upload National Identity Card (NIN) - Image or PDF:</strong></label>
+<label for="nin"><strong>Upload National Identity Card (NIN) - Image Only:</strong></label>
 <input type="file" id="nin" accept="image/*" required />
 
     <input type="text" id="position" placeholder="Official Position (e.g. Secretary)" required />
@@ -253,7 +253,11 @@ style="display:none; max-width:100px; margin: 10px auto; display: block;" />
     // Confirm success
 console.log("Signup complete. Showing modal...");
 document.getElementById("successModal").style.display = "block";
-setTimeout(() => goToLogin(), 3000); // Redirect after 3 seconds
+setTimeout(() => {
+  document.getElementById("successModal").style.display = "none";
+  goToLogin();
+}, 3000); // Close modal and redirect after 3 seconds
+
 
   } catch (error) {
     console.error("Signup error:", error);
