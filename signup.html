@@ -269,9 +269,11 @@ console.log("Signup complete. Showing modal...");
 document.getElementById("successModal").style.display = "block";
 
 setTimeout(() => {
+  console.log("Redirecting to login..."); // Add this
   document.getElementById("successModal").style.display = "none";
   goToLogin();
-}, 3000); // Show modal, then redirect
+}, 3000);
+
 
 
 
