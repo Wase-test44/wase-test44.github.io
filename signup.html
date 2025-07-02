@@ -196,58 +196,68 @@
   }
 
   async function signUp() {
-    const errorDiv = document.getElementById("error");
-    errorDiv.textContent = "";
+  const errorDiv = document.getElementById("error");
+  errorDiv.textContent = "";
+  const button = document.querySelector("button[type='submit']");
+  const originalBtnText = button.textContent;
+  button.textContent = "Signing up...";
+  button.disabled = true;
 
-    try {
-      const position = document.getElementById("position").value.trim();
-      const passkey = document.getElementById("passkeyInput").value.trim();
-      const passkeyDoc = await getDoc(doc(db, "official_passkeys", position.toLowerCase().replace(/\s+/g, "_")));
-      if (!passkeyDoc.exists() || passkeyDoc.data().passkey !== passkey) {
-        errorDiv.textContent = "Invalid or unauthorized passkey.";
-        return;
-      }
+  try {
+    const position = document.getElementById("position").value.trim();
+    const passkey = document.getElementById("passkeyInput").value.trim();
+    const passkeyDoc = await getDoc(doc(db, "official_passkeys", position.toLowerCase().replace(/\s+/g, "_")));
 
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("password").value.trim();
-      const surname = document.getElementById("surname").value.trim();
-      const firstname = document.getElementById("firstname").value.trim();
-      const othername = document.getElementById("othername").value.trim();
-      const dob = document.getElementById("dob").value;
-      const gender = document.getElementById("gender").value;
-      const phone = document.getElementById("phone").value.trim();
-      const address = document.getElementById("address").value.trim();
-      const state = document.getElementById("state").value;
-      const lga = document.getElementById("lga").value;
-      const qualification = document.getElementById("qualification").value.trim();
-      const grad_year = document.getElementById("grad_year").value.trim();
-      const passportFile = document.getElementById("passport").files[0];
-      const ninFile = document.getElementById("nin").files[0];
-
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      const userId = userCredential.user.uid;
-
-      const passportURL = await uploadFile(passportFile, `official_passports/${userId}`);
-      const ninURL = await uploadFile(ninFile, `official_nins/${userId}`);
-
-      await setDoc(doc(db, "official_profiles", userId), {
-        position, surname, firstname, othername, dob, gender,
-        email, phone, address, state, lga, qualification, grad_year,
-        passportURL, ninURL
-      });
-
-     document.getElementById("successModal").style.display = "block";
-
-    } catch (error) {
-      console.error("Signup error:", error);
-      errorDiv.textContent = error.message;
+    if (!passkeyDoc.exists() || passkeyDoc.data().passkey !== passkey) {
+      throw new Error("Invalid or unauthorized passkey.");
     }
-  }
 
-  document.getElementById("signupForm").addEventListener("submit", function(e) {
-    e.preventDefault();
-    signUp();
-  });
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+    const surname = document.getElementById("surname").value.trim();
+    const firstname = document.getElementById("firstname").value.trim();
+    const othername = document.getElementById("othername").value.trim();
+    const dob = document.getElementById("dob").value;
+    const gender = document.getElementById("gender").value;
+    const phone = document.getElementById("phone").value.trim();
+    const address = document.getElementById("address").value.trim();
+    const state = document.getElementById("state").value;
+    const lga = document.getElementById("lga").value;
+    const qualification = document.getElementById("qualification").value.trim();
+    const grad_year = document.getElementById("grad_year").value.trim();
+    const passportFile = document.getElementById("passport").files[0];
+    const ninFile = document.getElementById("nin").files[0];
+
+    if (!passportFile || !ninFile) {
+      throw new Error("Please upload both passport and NIN file.");
+    }
+
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    const userId = userCredential.user.uid;
+
+    const passportURL = await uploadFile(passportFile, `official_passports/${userId}`);
+    const ninURL = await uploadFile(ninFile, `official_nins/${userId}`);
+
+    await setDoc(doc(db, "official_profiles", userId), {
+      position, surname, firstname, othername, dob, gender,
+      email, phone, address, state, lga, qualification, grad_year,
+      passportURL, ninURL
+    });
+
+    // Confirm success
+    console.log("Signup complete. Showing modal...");
+    alert("Signup successful! You will now be redirected.");
+    document.getElementById("successModal").style.display = "block";
+
+  } catch (error) {
+    console.error("Signup error:", error);
+    errorDiv.textContent = error.message;
+  } finally {
+    button.textContent = originalBtnText;
+    button.disabled = false;
+  }
+}
+
 </script>
 <script>
   const lgaData = {
