@@ -251,10 +251,9 @@ style="display:none; max-width:100px; margin: 10px auto; display: block;" />
     });
 
     // Confirm success
-    console.log("Signup complete. Showing modal...");
-    // Replace alert
+console.log("Signup complete. Showing modal...");
 document.getElementById("successModal").style.display = "block";
-
+setTimeout(() => goToLogin(), 3000); // Redirect after 3 seconds
 
   } catch (error) {
     console.error("Signup error:", error);
@@ -316,6 +315,7 @@ document.getElementById("signupForm").addEventListener("submit", function(e) {
   <div class="modal-content">
     <p>Signup successful! Please proceed to login.</p>
     <button onclick="goToLogin()">OK</button>
+    
   </div>
 </div>
 <script>
