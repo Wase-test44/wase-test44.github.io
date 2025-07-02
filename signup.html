@@ -247,8 +247,9 @@ style="display:none; max-width:100px; margin: 10px auto; display: block;" />
 
     // Confirm success
     console.log("Signup complete. Showing modal...");
-    alert("Signup successful! You will now be redirected.");
-    document.getElementById("successModal").style.display = "block";
+    // Replace alert
+document.getElementById("successModal").style.display = "block";
+
 
   } catch (error) {
     console.error("Signup error:", error);
