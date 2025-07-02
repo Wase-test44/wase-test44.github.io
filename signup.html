@@ -94,10 +94,11 @@
   <form id="signupForm">
     <label for="passport"><strong>Upload Passport Photograph (Image Only):</strong></label>
 <input type="file" id="passport" accept="image/*" required />
-<img id="passportPreview" src="#" alt="Passport Preview" style="display:none; max-width:100px; margin-top:10px;" />
+<img id="passportPreview" src="#" alt="Passport Preview" 
+style="display:none; max-width:100px; margin: 10px auto; display: block;" />
 
 <label for="nin"><strong>Upload National Identity Card (NIN) - Image or PDF:</strong></label>
-<input type="file" id="nin" accept="application/pdf,image/*" required />
+<input type="file" id="nin" accept="image/*" required />
 
     <input type="text" id="position" placeholder="Official Position (e.g. Secretary)" required />
     <input type="password" id="passkeyInput" placeholder="Enter Passkey" required />
