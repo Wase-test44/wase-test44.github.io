@@ -257,6 +257,10 @@
     button.disabled = false;
   }
 }
+document.getElementById("signupForm").addEventListener("submit", function(e) {
+  e.preventDefault(); // 🚨 CRUCIAL: prevents default form submission
+  signUp();
+});
 
 </script>
 <script>
