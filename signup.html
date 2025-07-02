@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">f
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -60,9 +60,9 @@
 <div class="signup-box">
   <h2>Official Signup</h2>
   <form id="signupForm">
-    <input type="file" id="passport" accept="image/*" placeholder="Upload Passport Photograph" required />
+    <input type="file" id="passport" accept="image/*" required />
     <img id="passportPreview" src="#" alt="Passport Preview" style="display:none; max-width:100px; margin-top:10px;" />
-    <input type="file" id="nin" accept="application/pdf,image/*" placeholder="Upload NIN Slip" required />
+    <input type="file" id="nin" accept="application/pdf,image/*" required />
     <input type="text" id="position" placeholder="Official Position (e.g. Secretary)" required />
     <input type="password" id="passkeyInput" placeholder="Enter Passkey" required />
     <div class="row">
@@ -87,26 +87,8 @@
     <div class="row">
       <select id="state" onchange="loadLGAs()" required>
         <option value="">Select State of Origin</option>
-        <option value="Adamawa">Adamawa</option>
-        <option value="Bauchi">Bauchi</option>
-        <option value="Benue">Benue</option>
-        <option value="Borno">Borno</option>
-        <option value="FCT">FCT</option>
-        <option value="Gombe">Gombe</option>
-        <option value="Jigawa">Jigawa</option>
-        <option value="Kaduna">Kaduna</option>
-        <option value="Kano">Kano</option>
-        <option value="Katsina">Katsina</option>
-        <option value="Kebbi">Kebbi</option>
-        <option value="Kogi">Kogi</option>
-        <option value="Kwara">Kwara</option>
-        <option value="Nasarawa">Nasarawa</option>
-        <option value="Niger">Niger</option>
+        <!-- Add all states here -->
         <option value="Plateau">Plateau</option>
-        <option value="Sokoto">Sokoto</option>
-        <option value="Taraba">Taraba</option>
-        <option value="Yobe">Yobe</option>
-        <option value="Zamfara">Zamfara</option>
       </select>
       <select id="lga" required>
         <option value="">Select LGA of Origin</option>
@@ -122,42 +104,16 @@
 </div>
 
 <script>
-  const lgaData = {
-    Adamawa: ["Demsa", "Fufore", "Ganye", "Girei", "Gombi", "Guyuk", "Hong", "Jada", "Lamurde", "Madagali", "Maiha", "Mayo-Belwa", "Michika", "Mubi North", "Mubi South", "Numan", "Shelleng", "Song", "Toungo", "Yola North", "Yola South"],
-    Bauchi: ["Alkaleri", "Bauchi", "Bogoro", "Damban", "Darazo", "Dass", "Gamawa", "Ganjuwa", "Giade", "Itas/Gadau", "Jama'are", "Katagum", "Kirfi", "Misau", "Ningi", "Shira", "Tafawa Balewa", "Toro", "Warji", "Zaki"],
-    Benue: ["Ado", "Agatu", "Apa", "Buruku", "Gboko", "Guma", "Gwer East", "Gwer West", "Katsina-Ala", "Konshisha", "Kwande", "Logo", "Makurdi", "Obi", "Ogbadibo", "Ohimini", "Oju", "Okpokwu", "Otukpo", "Tarka", "Ukum", "Ushongo", "Vandeikya"],
-    Borno: ["Abadam", "Askira/Uba", "Bama", "Bayo", "Biu", "Chibok", "Damboa", "Dikwa", "Gubio", "Guzamala", "Gwoza", "Hawul", "Jere", "Kaga", "Kala/Balge", "Konduga", "Kukawa", "Kwaya Kusar", "Mafa", "Magumeri", "Maiduguri", "Marte", "Mobbar", "Monguno", "Ngala", "Nganzai", "Shani"],
-    FCT: ["Abaji", "Bwari", "Gwagwalada", "Kuje", "Kwali", "Municipal"],
-    Gombe: ["Akko", "Balanga", "Billiri", "Dukku", "Funakaye", "Gombe", "Kaltungo", "Kwami", "Nafada", "Shongom", "Yamaltu/Deba"], <!-- ✅ comma added here -->
-    "Jigawa": ["Auyo", "Babura", "Biriniwa", "Birnin Kudu", "Buji", "Dutse", "Gagarawa", "Garki", "Gumel", "Guri", "Gwaram", "Gwiwa", "Hadejia", "Jahun", "Kafin Hausa", "Kaugama", "Kazaure", "Kiri Kasama", "Kiyawa", "Maigatari", "Malam Madori", "Miga", "Ringim", "Roni", "Sule Tankarkar", "Taura", "Yankwashi"],
-    "Kaduna": ["Birnin Gwari", "Chikun", "Giwa", "Igabi", "Ikara", "Jaba", "Jema'a", "Kachia", "Kaduna North", "Kaduna South", "Kagarko", "Kajuru", "Kaura", "Kauru", "Kubau", "Kudan", "Lere", "Makarfi", "Sabon Gari", "Sanga", "Soba", "Zangon Kataf", "Zaria"],
-    "Kano": ["Ajingi", "Albasu", "Bagwai", "Bebeji", "Bichi", "Bunkure", "Dala", "Dambatta", "Dawakin Kudu", "Dawakin Tofa", "Doguwa", "Fagge", "Gabasawa", "Garko", "Garun Mallam", "Gaya", "Gezawa", "Gwale", "Gwarzo", "Kabo", "Kano Municipal", "Karaye", "Kibiya", "Kiru", "Kumbotso", "Kunchi", "Kura", "Madobi", "Makoda", "Minjibir", "Nasarawa", "Rano", "Rimin Gado", "Rogo", "Shanono", "Sumaila", "Takai", "Tarauni", "Tofa", "Tsanyawa", "Tudun Wada", "Ungogo", "Warawa", "Wudil"],
-    "Katsina": ["Bakori", "Batagarawa", "Batsari", "Baure", "Bindawa", "Charanchi", "Dandume", "Danja", "Dan Musa", "Daura", "Dutsi", "Dutsin-Ma", "Faskari", "Funtua", "Ingawa", "Jibia", "Kafur", "Kaita", "Kankara", "Kankia", "Katsina", "Kurfi", "Kusada", "Mai'Adua", "Malumfashi", "Mani", "Mashi", "Matazu", "Musawa", "Rimi", "Sabuwa", "Safana", "Sandamu", "Zango"],
-    "Kebbi": ["Aleiro", "Arewa Dandi", "Argungu", "Augie", "Bagudo", "Birnin Kebbi", "Bunza", "Dandi", "Fakai", "Gwandu", "Jega", "Kalgo", "Koko/Besse", "Maiyama", "Ngaski", "Sakaba", "Shanga", "Suru", "Wasagu/Danko", "Yauri", "Zuru"],
-    "Kogi": ["Adavi", "Ajaokuta", "Ankpa", "Bassa", "Dekina", "Ibaji", "Idah", "Igalamela-Odolu", "Ijumu", "Kabba/Bunu", "Kogi", "Lokoja", "Mopa-Muro", "Ofu", "Ogori/Magongo", "Okehi", "Okene", "Olamaboro", "Omala", "Yagba East", "Yagba West"],
-    "Kwara": ["Asa", "Baruten", "Edu", "Ekiti", "Ifelodun", "Ilorin East", "Ilorin South", "Ilorin West", "Irepodun", "Isin", "Kaiama", "Moro", "Offa", "Oke Ero", "Oyun", "Pategi"],
-    "Nasarawa": ["Akwanga", "Awe", "Doma", "Karu", "Keana", "Keffi", "Kokona", "Lafia", "Nasarawa", "Nasarawa Eggon", "Obi", "Toto", "Wamba"],
-    "Niger": ["Agaie", "Agwara", "Bida", "Borgu", "Bosso", "Chanchaga", "Edati", "Gbako", "Gurara", "Katcha", "Kontagora", "Lapai", "Lavun", "Magama", "Mariga", "Mashegu", "Mokwa", "Munya", "Paikoro", "Rafi", "Rijau", "Shiroro", "Suleja", "Tafa", "Wushishi"],
-    "Plateau": ["Barkin Ladi", "Bassa", "Bokkos", "Jos East", "Jos North", "Jos South", "Kanam", "Kanke", "Langtang North", "Langtang South", "Mangu", "Mikang", "Pankshin", "Qua'an Pan", "Riyom", "Shendam", "Wase"],
-    "Sokoto": ["Binji", "Bodinga", "Dange Shuni", "Gada", "Goronyo", "Gudu", "Gwadabawa", "Illela", "Isa", "Kebbe", "Kware", "Rabah", "Sabon Birni", "Shagari", "Silame", "Sokoto North", "Sokoto South", "Tambuwal", "Tangaza", "Tureta", "Wamako", "Wurno", "Yabo"],
-    "Taraba": ["Ardo-Kola", "Bali", "Donga", "Gashaka", "Gassol", "Ibi", "Jalingo", "Karim-Lamido", "Kumi", "Lau", "Sardauna", "Takum", "Ussa", "Wukari", "Yorro", "Zing"],
-    "Yobe": ["Bade", "Bursari", "Damaturu", "Fika", "Fune", "Geidam", "Gujba", "Gulani", "Jakusko", "Karasuwa", "Machina", "Nangere", "Nguru", "Potiskum", "Tarmuwa", "Yunusari", "Yusufari"],
-    "Zamfara": ["Anka", "Bakura", "Birnin Magaji", "Bukkuyum", "Bungudu", "Gummi", "Gusau", "Kaura Namoda", "Maradun", "Maru", "Shinkafi", "Talata Mafara", "Chafe", "Zurmi"]
-  };
-
-  function loadLGAs() {
-    const state = document.getElementById('state').value;
-    const lgaSelect = document.getElementById('lga');
-    lgaSelect.innerHTML = '<option value="">Select LGA of Origin</option>';
-    if (lgaData[state]) {
-      lgaData[state].forEach(lga => {
-        const option = document.createElement('option');
-        option.value = lga;
-        option.textContent = lga;
-        lgaSelect.appendChild(option);
-      });
-    }
-  }
+  // Passport preview
+  document.getElementById("passport").addEventListener("change", function () {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      const img = document.getElementById("passportPreview");
+      img.src = e.target.result;
+      img.style.display = "block";
+    };
+    reader.readAsDataURL(this.files[0]);
+  });
 </script>
 
 <script type="module">
@@ -180,100 +136,65 @@
   const auth = getAuth(app);
   const storage = getStorage(app);
 
-  async function signUp() {
-  const position = document.getElementById("position").value.trim();
-  const passkey = document.getElementById("passkeyInput").value.trim();
-  const errorDiv = document.getElementById("error");
-  errorDiv.textContent = "";
-
-  try {
-    console.log("🔑 Checking passkey for position:", position);
-    const docRef = doc(db, "official_passkeys", position.toLowerCase().replace(/\s+/g, "_"));
-    const docSnap = await getDoc(docRef);
-
-    if (!docSnap.exists()) {
-      console.error("❌ Passkey document not found.");
-      errorDiv.textContent = "Invalid or unauthorized passkey.";
-      return;
-    }
-
-    if (docSnap.data().passkey !== passkey) {
-      console.error("❌ Passkey mismatch.");
-      errorDiv.textContent = "Invalid or unauthorized passkey.";
-      return;
-    }
-
-    console.log("✅ Passkey validated.");
-    await setDoc(doc(db, "official_profiles", userId), {
-  position,
-  surname,
-  firstname,
-  othername,
-  dob,
-  gender,
-  email,
-  phone,
-  address,
-  state,
-  lga,
-  qualification,
-  grad_year,
-  passportURL,
-  ninURL
-});
-
-
-    const email = document.getElementById("email").value.trim();
-    const password = document.getElementById("password").value.trim();
-    const surname = document.getElementById("surname").value.trim();
-    const firstname = document.getElementById("firstname").value.trim();
-    const othername = document.getElementById("othername").value.trim();
-    const dob = document.getElementById("dob").value;
-    const gender = document.getElementById("gender").value;
-    const phone = document.getElementById("phone").value.trim();
-    const address = document.getElementById("address").value.trim();
-    const state = document.getElementById("state").value;
-    const lga = document.getElementById("lga").value;
-    const qualification = document.getElementById("qualification").value.trim();
-    const grad_year = document.getElementById("grad_year").value.trim();
-
-    console.log("📧 Creating user with email:", email);
-    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-    const userId = userCredential.user.uid;
-    console.log("👤 Firebase user created. UID:", userId);
-
-    console.log("📄 Storing user profile in Firestore...");
-    await setDoc(doc(db, "official_profiles", userId), {
-      position,
-      surname,
-      firstname,
-      othername,
-      dob,
-      gender,
-      email,
-      phone,
-      address,
-      state,
-      lga,
-      qualification,
-      grad_year
-    });
-
-    console.log("✅ User profile saved successfully.");
-    alert("Signup successful!");
-    window.location.href = "login.html";
-  } catch (error) {
-    console.error("❌ Error during signup:", error);
-    errorDiv.textContent = error.message;
+  async function uploadFile(file, path) {
+    const storageRef = ref(storage, path);
+    await uploadBytes(storageRef, file);
+    return await getDownloadURL(storageRef);
   }
-}
 
-  window.signUp = signUp;
-</script>
-<script>
+  async function signUp() {
+    const errorDiv = document.getElementById("error");
+    errorDiv.textContent = "";
+
+    try {
+      const position = document.getElementById("position").value.trim();
+      const passkey = document.getElementById("passkeyInput").value.trim();
+      const passkeyDoc = await getDoc(doc(db, "official_passkeys", position.toLowerCase().replace(/\s+/g, "_")));
+      if (!passkeyDoc.exists() || passkeyDoc.data().passkey !== passkey) {
+        errorDiv.textContent = "Invalid or unauthorized passkey.";
+        return;
+      }
+
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const surname = document.getElementById("surname").value.trim();
+      const firstname = document.getElementById("firstname").value.trim();
+      const othername = document.getElementById("othername").value.trim();
+      const dob = document.getElementById("dob").value;
+      const gender = document.getElementById("gender").value;
+      const phone = document.getElementById("phone").value.trim();
+      const address = document.getElementById("address").value.trim();
+      const state = document.getElementById("state").value;
+      const lga = document.getElementById("lga").value;
+      const qualification = document.getElementById("qualification").value.trim();
+      const grad_year = document.getElementById("grad_year").value.trim();
+      const passportFile = document.getElementById("passport").files[0];
+      const ninFile = document.getElementById("nin").files[0];
+
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const userId = userCredential.user.uid;
+
+      const passportURL = await uploadFile(passportFile, `official_passports/${userId}`);
+      const ninURL = await uploadFile(ninFile, `official_nins/${userId}`);
+
+      await setDoc(doc(db, "official_profiles", userId), {
+        position, surname, firstname, othername, dob, gender,
+        email, phone, address, state, lga, qualification, grad_year,
+        passportURL, ninURL
+      });
+
+      alert("Signup successful!");
+      window.location.href = "login.html";
+
+    } catch (error) {
+      console.error("Signup error:", error);
+      errorDiv.textContent = error.message;
+    }
+  }
+
   document.getElementById("signupForm").addEventListener("submit", function(e) {
-    e.preventDefault(); // Prevent page refresh
-    signUp(); // Call your async signUp() function
+    e.preventDefault();
+    signUp();
   });
 </script>
 
