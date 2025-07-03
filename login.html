@@ -31,91 +31,87 @@
         <label class="form-label">Password</label>
         <input type="password" class="form-control" id="password" required />
       </div>
+      <div class="mb-3">
+  <label class="form-label">Passkey</label>
+  <input type="password" class="form-control" id="passkeyInput" required />
+</div>
+
        <button type="submit" class="btn btn-success w-100">Login</button>
     </form>
   </div>
 
   <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js";
-    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-auth.js";
-    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore.js";
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js";
+  import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-auth.js";
+  import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore.js";
 
-    const firebaseConfig = {
-  apiKey: "AIzaSyDWNLns4skz3zOyvYxIssiR0B3QSGN1li8",
-  authDomain: "arewa-progressive-eagle.firebaseapp.com",
-  projectId: "arewa-progressive-eagle",
-  storageBucket: "arewa-progressive-eagle.appspot.com",
-  messagingSenderId: "1002389077766",
-  appId: "1:1002389077766:web:9af458f75b345588dea887"
-};
+  const firebaseConfig = {
+    apiKey: "AIzaSyDWNLns4skz3zOyvYxIssiR0B3QSGN1li8",
+    authDomain: "arewa-progressive-eagle.firebaseapp.com",
+    projectId: "arewa-progressive-eagle",
+    storageBucket: "arewa-progressive-eagle.appspot.com",
+    messagingSenderId: "1002389077766",
+    appId: "1:1002389077766:web:9af458f75b345588dea887"
+  };
 
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
 
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth();
-    const db = getFirestore();
+  document.getElementById("loginForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+    const passkeyInput = document.getElementById("passkeyInput").value.trim();
 
-    document.getElementById("loginForm").addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
-      const passkeyInput = document.getElementById("passkeyInput").value;
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      const userDoc = await getDoc(doc(db, "official_profiles", user.uid));
 
-      try {
-        const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        const user = userCredential.user;
-        const userDoc = await getDoc(doc(db, "users", user.uid));
-
-        if (!userDoc.exists()) {
-          alert("User data not found.");
-          return;
-        }
-
-        const role = userDoc.data().role;
-
-        const passkeyDoc = await getDoc(doc(db, "passkeys", role));
-        if (!passkeyDoc.exists() || passkeyDoc.data().passkey !== passkeyInput) {
-          alert("Invalid passkey for this role.");
-          return;
-        }
-
-        switch(role) {
-          case "Chairman":
-            window.location.href = "dashboard_chairman.html";
-            break;
-          case "Secretary":
-            window.location.href = "dashboard_secretary.html";
-            break;
-          case "Director of Planning, Research and Documentation":
-            window.location.href = "dashboard_planning.html";
-            break;
-          case "Director of Finance":
-            window.location.href = "dashboard_finance.html";
-            break;
-          case "Director of Environmental Management":
-            window.location.href = "dashboard_environment.html";
-            break;
-          case "Director of Public Affairs":
-            window.location.href = "dashboard_public_affairs.html";
-            break;
-          case "Director of Sports":
-            window.location.href = "dashboard_sports.html";
-            break;
-          case "Director of Culture and Tourism":
-            window.location.href = "dashboard_culture.html";
-            break;
-          case "State Coordinator":
-            window.location.href = "dashboard_state.html";
-            break;
-          case "Admin":
-            window.location.href = "admin_panel.html";
-            break;
-          default:
-            alert("Access denied: Unrecognized role");
-        }
-      } catch (error) {
-        alert("Login failed: " + error.message);
+      if (!userDoc.exists()) {
+        alert("User data not found.");
+        return;
       }
-    });
-  </script>
+
+      const role = userDoc.data().position;
+      const passkeyDoc = await getDoc(doc(db, "official_passkeys", role.toLowerCase().replace(/\s+/g, "_")));
+
+      if (!passkeyDoc.exists() || passkeyDoc.data().passkey !== passkeyInput) {
+        alert("Invalid passkey for this role.");
+        return;
+      }
+
+      // Redirect based on role
+      switch(role) {
+        case "Chairman":
+          window.location.href = "dashboard_chairman.html";
+          break;
+        case "Secretary":
+          window.location.href = "dashboard_secretary.html";
+          break;
+        case "Director of Planning, Research and Documentation":
+          window.location.href = "dashboard_planning.html";
+          break;
+        case "Director of Finance":
+          window.location.href = "dashboard_finance.html";
+          break;
+        case "Director of Environmental Management":
+          window.location.href = "dashboard_environment.html";
+          break;
+        case "State Coordinator":
+          window.location.href = "dashboard_state.html";
+          break;
+        case "Admin":
+          window.location.href = "admin_panel.html";
+          break;
+        default:
+          alert("Access denied: Unrecognized role.");
+      }
+    } catch (error) {
+      alert("Login failed: " + error.message);
+    }
+  });
+</script>
 </body>
 </html>
