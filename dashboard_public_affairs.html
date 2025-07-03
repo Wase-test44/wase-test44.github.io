@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Public Affairs Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #e8f5e9;
+      margin: 0;
+    }
+    header {
+      background: #1b5e20;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    nav {
+      background: #c8e6c9;
+      padding: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+    nav button {
+      padding: 10px 15px;
+      border: none;
+      background: #81c784;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    main {
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Director of Public Affairs</h1>
+    <p>Engage the public and media to promote transparency and awareness</p>
+  </header>
+
+  <nav>
+    <button onclick="showContent('press')">Issue Press Releases</button>
+    <button onclick="showContent('media')">Media Engagement</button>
+    <button onclick="showContent('publications')">Manage Publications</button>
+    <button onclick="showContent('social')">Monitor Social Media</button>
+    <button onclick="showContent('report')">Submit Monthly Report</button>
+  </nav>
+
+  <main id="dashboardContent">
+    <h2>Welcome, Director</h2>
+    <p>Select a task above to manage public communications and outreach.</p>
+  </main>
+
+  <script>
+    function showContent(section) {
+      const content = {
+        press: "<h2>Issue Press Releases</h2><p>Create and distribute official statements and updates on behalf of the organization.</p>",
+        media: "<h2>Media Engagement</h2><p>Coordinate interviews, press conferences, and media coverage for APEM activities.</p>",
+        publications: "<h2>Manage Publications</h2><p>Oversee newsletters, reports, and educational materials related to public affairs.</p>",
+        social: "<h2>Monitor Social Media</h2><p>Track public perception, respond to feedback, and manage social media presence.</p>",
+        report: "<h2>Submit Monthly Report</h2><p>Compile and submit a detailed report on public affairs to the Chairman.</p>"
+      };
+      document.getElementById("dashboardContent").innerHTML = content[section] || "<p>Feature under development.</p>";
+    }
+  </script>
+</body>
+</html>
