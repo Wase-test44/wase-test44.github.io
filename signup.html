@@ -267,12 +267,14 @@ style="display:none; max-width:100px; margin: 10px auto; display: block;" />
     // Show success modal
     document.getElementById("successModal").style.display = "block";
 
-    setTimeout(() => {
-      document.getElementById("successModal").style.display = "none";
-      goToLogin(); // ✅ Redirection
-    }, 3000);
+   setTimeout(() => {
+  console.log("Redirecting to login...");
+  document.getElementById("successModal").style.display = "none";
+  goToLogin();
+}, 3000); // ✅ No extra closing brace here
 
   } catch (error) {
+
     console.error("Signup error:", error);
     errorDiv.textContent = error.message;
     button.textContent = originalBtnText;
