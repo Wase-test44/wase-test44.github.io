@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Environmental Management Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f1f8f6;
+      margin: 0;
+    }
+    header {
+      background: #388e3c;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    nav {
+      background: #e0f2f1;
+      padding: 10px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    nav button {
+      padding: 10px 15px;
+      border: none;
+      background: #a5d6a7;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    main {
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Director of Environmental Management</h1>
+    <p>Monitor and manage environmental initiatives and reports</p>
+  </header>
+
+  <nav>
+    <button onclick="showContent('recordIssues')">Record Environmental Issues</button>
+    <button onclick="showContent('trackActivities')">Track Environmental Activities</button>
+    <button onclick="showContent('uploadReport')">Upload Environmental Report</button>
+    <button onclick="showContent('viewCampaigns')">View Tree Planting Campaigns</button>
+    <button onclick="showContent('submitUpdate')">Submit Environmental Update</button>
+  </nav>
+
+  <main id="dashboardContent">
+    <h2>Welcome</h2>
+    <p>Select a task above to begin managing environmental operations.</p>
+  </main>
+
+  <script>
+    function showContent(section) {
+      const contentMap = {
+        recordIssues: "<h2>Record Environmental Issues</h2><p>Log issues such as pollution, deforestation, erosion, or any environmental hazard observed.</p>",
+        trackActivities: "<h2>Track Environmental Activities</h2><p>Monitor projects like sanitation exercises, recycling drives, or awareness campaigns.</p>",
+        uploadReport: "<h2>Upload Environmental Report</h2><p>Upload monthly or special environmental reports for organizational records.</p>",
+        viewCampaigns: "<h2>View Tree Planting Campaigns</h2><p>Access and update the records of all tree planting initiatives and locations.</p>",
+        submitUpdate: "<h2>Submit Environmental Update</h2><p>Send updates on ongoing environmental projects or challenges encountered.</p>"
+      };
+      document.getElementById("dashboardContent").innerHTML = contentMap[section] || "<p>Feature under development.</p>";
+    }
+  </script>
+</body>
+</html>
