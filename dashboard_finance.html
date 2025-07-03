@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Director of Finance Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f7f5;
+      margin: 0;
+    }
+    header {
+      background: #2e7d32;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    nav {
+      background: #e8f5e9;
+      padding: 10px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    nav button {
+      padding: 10px 15px;
+      border: none;
+      background: #a5d6a7;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    main {
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Director of Finance Dashboard</h1>
+    <p>Manage and oversee financial operations of the organization</p>
+  </header>
+
+  <nav>
+    <button onclick="showContent('viewBudget')">View Budget Records</button>
+    <button onclick="showContent('uploadReport')">Upload Financial Report</button>
+    <button onclick="showContent('approvePayments')">Approve Payments</button>
+    <button onclick="showContent('donorReports')">Generate Donor Reports</button>
+    <button onclick="showContent('auditTrail')">Access Audit Trail</button>
+  </nav>
+
+  <main id="dashboardContent">
+    <h2>Welcome</h2>
+    <p>Select an action from the dashboard above.</p>
+  </main>
+
+  <script>
+    function showContent(action) {
+      const content = {
+        viewBudget: "<h2>Budget Records</h2><p>Here you can view all the financial budgets allocated by project or period.</p>",
+        uploadReport: "<h2>Upload Financial Report</h2><p>Upload monthly or quarterly financial reports for records and transparency.</p>",
+        approvePayments: "<h2>Approve Payments</h2><p>Review and approve pending payment requests submitted by departments.</p>",
+        donorReports: "<h2>Generate Donor Reports</h2><p>Prepare reports tailored to meet donor transparency requirements.</p>",
+        auditTrail: "<h2>Audit Trail</h2><p>View the financial transaction history and audit logs.</p>"
+      };
+      document.getElementById("dashboardContent").innerHTML = content[action] || "<p>Functionality coming soon.</p>";
+    }
+  </script>
+</body>
+</html>
