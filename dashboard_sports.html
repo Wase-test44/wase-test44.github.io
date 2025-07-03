@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sports Director Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f1f8e9;
+      margin: 0;
+    }
+    header {
+      background: #33691e;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    nav {
+      background: #dcedc8;
+      padding: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+    nav button {
+      padding: 10px 15px;
+      border: none;
+      background: #aed581;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    main {
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Director of Sports</h1>
+    <p>Coordinate and promote physical development programs</p>
+  </header>
+
+  <nav>
+    <button onclick="showContent('events')">Plan Sports Events</button>
+    <button onclick="showContent('teams')">Manage Teams</button>
+    <button onclick="showContent('equipment')">Track Equipment</button>
+    <button onclick="showContent('fitness')">Promote Fitness Campaigns</button>
+    <button onclick="showContent('report')">Submit Monthly Report</button>
+  </nav>
+
+  <main id="dashboardContent">
+    <h2>Welcome, Director</h2>
+    <p>Select a task above to manage sports development and programs.</p>
+  </main>
+
+  <script>
+    function showContent(section) {
+      const content = {
+        events: "<h2>Plan Sports Events</h2><p>Organize and manage local and regional sports competitions and activities.</p>",
+        teams: "<h2>Manage Teams</h2><p>Oversee team selections, registrations, and communications for sports activities.</p>",
+        equipment: "<h2>Track Equipment</h2><p>Monitor and manage the inventory of sports gear and facilities.</p>",
+        fitness: "<h2>Promote Fitness Campaigns</h2><p>Launch initiatives that encourage regular exercise and healthy living.</p>",
+        report: "<h2>Submit Monthly Report</h2><p>Compile and send a monthly summary of sports activities and initiatives.</p>"
+      };
+      document.getElementById("dashboardContent").innerHTML = content[section] || "<p>Feature under development.</p>";
+    }
+  </script>
+</body>
+</html>
