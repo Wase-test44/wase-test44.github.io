@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Culture & Tourism Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #fff8e1;
+      margin: 0;
+    }
+    header {
+      background: #ff6f00;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    nav {
+      background: #ffe0b2;
+      padding: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+    nav button {
+      padding: 10px 15px;
+      border: none;
+      background: #ffcc80;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    main {
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Director of Culture & Tourism</h1>
+    <p>Preserve and Promote AREWA's Rich Cultural Heritage</p>
+  </header>
+
+  <nav>
+    <button onclick="showContent('heritage')">Manage Cultural Heritage</button>
+    <button onclick="showContent('events')">Organize Cultural Events</button>
+    <button onclick="showContent('tourism')">Tourism Initiatives</button>
+    <button onclick="showContent('report')">Submit Cultural Report</button>
+  </nav>
+
+  <main id="dashboardContent">
+    <h2>Welcome, Director</h2>
+    <p>Select an activity above to begin your work on culture and tourism.</p>
+  </main>
+
+  <script>
+    function showContent(section) {
+      const content = {
+        heritage: "<h2>Manage Cultural Heritage</h2><p>Document and preserve indigenous languages, customs, traditions, and historical sites in AREWA.</p>",
+        events: "<h2>Organize Cultural Events</h2><p>Plan and promote cultural festivals, exhibitions, and tourism campaigns within the region.</p>",
+        tourism: "<h2>Tourism Initiatives</h2><p>Develop initiatives to attract both local and international tourists. Collaborate with relevant partners.</p>",
+        report: "<h2>Submit Cultural Report</h2><p>Submit monthly cultural activity and tourism development reports to the Chairman.</p>"
+      };
+      document.getElementById("dashboardContent").innerHTML = content[section] || "<p>Feature under development.</p>";
+    }
+  </script>
+</body>
+</html>
