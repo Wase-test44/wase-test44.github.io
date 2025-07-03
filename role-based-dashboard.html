@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Role-Based Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #eef2f5;
+      margin: 0;
+    }
+    header {
+      background: #2e7d32;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    nav {
+      background: #f4f4f4;
+      padding: 10px;
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+    }
+    nav button {
+      padding: 10px 15px;
+      border: none;
+      background: #ddd;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    main {
+      padding: 20px;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Welcome to Your Dashboard</h1>
+    <p id="roleTitle"></p>
+  </header>
+  <nav id="dashboardNav"></nav>
+  <main id="dashboardContent"></main>
+
+  <script>
+    const userRole = localStorage.getItem('position'); // Assume role saved after signup
+
+    const roleTitle = document.getElementById('roleTitle');
+    const nav = document.getElementById('dashboardNav');
+    const content = document.getElementById('dashboardContent');
+
+    const dashboards = {
+      Chairman: [
+        'View Officers Activities',
+        'Perform Executive Tasks',
+        'View Reports',
+        'Manage Files'
+      ],
+      Secretary: [
+        'Store Records',
+        'Transmit Files',
+        'Issue Vetting Forms',
+        'Receive Monthly Reports',
+        'Submit to Chairman'
+      ],
+      "Director of Planning, Research and Documentation": [
+        'Lead Strategic Planning',
+        'Data Analysis & Evaluation',
+        'Submit Monthly Reports',
+        'Receive Weekly Reports'
+      ],
+      "Director of Finance": [
+        'Access NGO Financial Operations',
+        'Submit Financial Reports'
+      ],
+      "Director of Environmental Management": [
+        'Maintain Environmental Records',
+        'Track Environmental Activities'
+      ],
+      "State Coordinator": [
+        'Upload Weekly Reports',
+        'Transmit to Officials',
+        'Access Personal Records'
+      ]
+    };
+
+    function createDashboard(role) {
+      roleTitle.textContent = `Role: ${role}`;
+
+      if (!dashboards[role]) {
+        content.innerHTML = '<p>No dashboard available for this role.</p>';
+        return;
+      }
+
+      nav.innerHTML = '';
+      content.innerHTML = '';
+
+      dashboards[role].forEach(task => {
+        const btn = document.createElement('button');
+        btn.textContent = task;
+        btn.onclick = () => content.innerHTML = `<h2>${task}</h2><p>Functionality coming soon...</p>`;
+        nav.appendChild(btn);
+      });
+    }
+
+    if (userRole) {
+      createDashboard(userRole);
+    } else {
+      roleTitle.textContent = 'No role found. Please sign up or log in.';
+    }
+  </script>
+</body>
+</html>
