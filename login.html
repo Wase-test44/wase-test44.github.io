@@ -70,48 +70,46 @@
       const userDoc = await getDoc(doc(db, "official_profiles", user.uid));
 
       if (!userDoc.exists()) {
-        alert("User data not found.");
+        alert("User profile not found.");
         return;
       }
 
       const role = userDoc.data().position;
-      const passkeyDoc = await getDoc(doc(db, "official_passkeys", role.toLowerCase().replace(/\s+/g, "_")));
+      const normalizedRoleKey = role.toLowerCase().replace(/\s+/g, "_");
 
+      const passkeyDoc = await getDoc(doc(db, "official_passkeys", normalizedRoleKey));
       if (!passkeyDoc.exists() || passkeyDoc.data().passkey !== passkeyInput) {
-        alert("Invalid passkey for this role.");
+        alert("Invalid passkey for this position.");
         return;
       }
 
-      // Redirect based on role
-      switch(role) {
-        case "Chairman":
-          window.location.href = "dashboard_chairman.html";
-          break;
-        case "Secretary":
-          window.location.href = "dashboard_secretary.html";
-          break;
-        case "Director of Planning, Research and Documentation":
-          window.location.href = "dashboard_planning.html";
-          break;
-        case "Director of Finance":
-          window.location.href = "dashboard_finance.html";
-          break;
-        case "Director of Environmental Management":
-          window.location.href = "dashboard_environment.html";
-          break;
-        case "State Coordinator":
-          window.location.href = "dashboard_state.html";
-          break;
-        case "Admin":
-          window.location.href = "admin_panel.html";
-          break;
-        default:
-          alert("Access denied: Unrecognized role.");
+      // Save role locally for dashboard logic
+      localStorage.setItem("position", role);
+
+      const dashboardRoutes = {
+        "Chairman": "dashboard_chairman.html",
+        "Secretary": "dashboard_secretary.html",
+        "Director of Planning, Research and Documentation": "dashboard_planning.html",
+        "Director of Finance": "dashboard_finance.html",
+        "Director of Environmental Management": "dashboard_environment.html",
+        "Director of Culture and Tourism": "dashboard_culture.html",
+        "Director of Sports": "dashboard_sports.html",
+        "Director of Public Affairs": "dashboard_public_affairs.html",
+        "State Coordinator": "dashboard_state.html",
+        "Admin": "admin_panel.html"
+      };
+
+      if (dashboardRoutes[role]) {
+        window.location.href = dashboardRoutes[role];
+      } else {
+        alert("Access denied: No dashboard assigned to this role.");
       }
+
     } catch (error) {
       alert("Login failed: " + error.message);
     }
   });
 </script>
+
 </body>
 </html>
