@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>State Coordinator Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4fdf7;
+      margin: 0;
+    }
+    header {
+      background: #2e7d32;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    nav {
+      background: #e8f5e9;
+      padding: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+    nav button {
+      padding: 10px 15px;
+      border: none;
+      background: #c8e6c9;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    main {
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>State Coordinator Dashboard</h1>
+    <p>Manage reports and activities from your state</p>
+  </header>
+
+  <nav>
+    <button onclick="showContent('uploadReport')">Upload Weekly Report</button>
+    <button onclick="showContent('transmitReport')">Transmit Report to Officials</button>
+    <button onclick="showContent('viewRecords')">Access My Records</button>
+    <button onclick="showContent('trackLGAs')">Track Zonal/LGA Reports</button>
+  </nav>
+
+  <main id="dashboardContent">
+    <h2>Welcome, State Coordinator</h2>
+    <p>Select an option above to begin your duties.</p>
+  </main>
+
+  <script>
+    function showContent(section) {
+      const content = {
+        uploadReport: "<h2>Upload Weekly Report</h2><p>Upload your state’s weekly progress report submitted by Zonal and LGA coordinators.</p>",
+        transmitReport: "<h2>Transmit Report</h2><p>Forward your compiled report to the Director of Planning, Research and Documentation or other designated officials.</p>",
+        viewRecords: "<h2>Access My Records</h2><p>View and manage your personal or past report files and history. Records can only be altered by the Chairman or ICT Director.</p>",
+        trackLGAs: "<h2>Track Zonal and LGA Reports</h2><p>Monitor weekly submissions and performance from your zonal and LGA coordinators.</p>"
+      };
+      document.getElementById("dashboardContent").innerHTML = content[section] || "<p>Feature under development.</p>";
+    }
+  </script>
+</body>
+</html>
