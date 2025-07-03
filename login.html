@@ -99,11 +99,17 @@
         "Admin": "admin_panel.html"
       };
 
-      if (dashboardRoutes[role]) {
-        window.location.href = dashboardRoutes[role];
-      } else {
-        alert("Access denied: No dashboard assigned to this role.");
-      }
+      let redirectUrl = dashboardRoutes[role];
+
+if (!redirectUrl && role.includes("Coordinator")) {
+  redirectUrl = dashboardRoutes["State Coordinator"];
+}
+
+if (redirectUrl) {
+  window.location.href = redirectUrl;
+} else {
+  alert("Access denied: No dashboard assigned to this role.");
+}
 
     } catch (error) {
       alert("Login failed: " + error.message);
