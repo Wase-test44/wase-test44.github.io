@@ -8,14 +8,27 @@
   <style>
     body {
       background-color: #f4fdf7;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
     }
     .login-box {
       max-width: 400px;
-      margin: 80px auto;
+      margin: 0 auto;
       padding: 30px;
       background: white;
       box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
       border-radius: 10px;
+    }
+    .error-message {
+      color: #dc3545;
+      font-size: 0.875rem;
+      margin-top: 5px;
+      display: none;
+    }
+    #loginError {
+      text-align: center;
+      margin-top: 15px;
     }
   </style>
 </head>
@@ -26,23 +39,35 @@
       <div class="mb-3">
         <label class="form-label">Email address</label>
         <input type="email" class="form-control" id="email" required />
+        <div class="error-message" id="emailError">Please enter a valid email</div>
       </div>
       <div class="mb-3">
         <label class="form-label">Password</label>
         <input type="password" class="form-control" id="password" required />
+        <div class="error-message" id="passwordError">Password is required</div>
       </div>
-      <div class="mb-3">
-        <label class="form-label">Passkey</label>
-        <input type="password" class="form-control" id="passkeyInput" required />
+      <button type="submit" class="btn btn-success w-100" id="loginBtn">Login</button>
+      <div class="text-center mt-3">
+        <a href="recover.html">Forgot Password?</a>
       </div>
-      <button type="submit" class="btn btn-success w-100">Login</button>
+      <div class="error-message mt-3 text-center" id="loginError"></div>
     </form>
   </div>
+
   <script type="module">
-  // Updated to use Firebase v11.9.1
   import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
-  import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
-  import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
+  import { 
+    getAuth, 
+    signInWithEmailAndPassword,
+    setPersistence,
+    browserSessionPersistence
+  } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
+  import { 
+    getFirestore, 
+    doc, 
+    getDoc 
+  } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
+
   const firebaseConfig = {
     apiKey: "AIzaSyDWNLns4skz3zOyvYxIssiR0B3QSGN1li8",
     authDomain: "arewa-progressive-eagle.firebaseapp.com",
@@ -51,56 +76,91 @@
     messagingSenderId: "1002389077766",
     appId: "1:1002389077766:web:9af458f75b345588dea887"
   };
+
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
   const db = getFirestore(app);
+
+  // Set session persistence
+  setPersistence(auth, browserSessionPersistence);
+
   document.getElementById("loginForm").addEventListener("submit", async (e) => {
     e.preventDefault();
+    
+    // Reset errors
+    document.querySelectorAll(".error-message").forEach(el => {
+      el.style.display = "none";
+    });
+    
     const email = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value.trim();
-    const passkeyInput = document.getElementById("passkeyInput").value.trim();
+    const loginBtn = document.getElementById("loginBtn");
+    const loginError = document.getElementById("loginError");
+    
+    // Validation
+    let isValid = true;
+    if (!email) {
+      document.getElementById("emailError").style.display = "block";
+      isValid = false;
+    }
+    if (!password) {
+      document.getElementById("passwordError").style.display = "block";
+      isValid = false;
+    }
+    if (!isValid) return;
+    
+    // Update button state
+    loginBtn.textContent = "Logging in...";
+    loginBtn.disabled = true;
+    
     try {
+      // Sign in with email/password
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
+      
+      // Get user profile
       const userDoc = await getDoc(doc(db, "official_profiles", user.uid));
+      
       if (!userDoc.exists()) {
-        alert("User profile not found.");
-        return;
+        throw new Error("User profile not found. Please contact support.");
       }
-      const role = userDoc.data().position;
-      const normalizedRoleKey = role.toLowerCase().replace(/\s+/g, "_");
-      const passkeyDoc = await getDoc(doc(db, "official_passkeys", normalizedRoleKey));
-      if (!passkeyDoc.exists() || passkeyDoc.data().passkey !== passkeyInput) {
-        alert("Invalid passkey for this position.");
-        return;
-      }
-      // Save role locally for dashboard logic
-      localStorage.setItem("position", role);
-      const dashboardRoutes = {
-        "Chairman": "dashboard_chairman.html",
-        "Secretary": "dashboard_secretary.html",
-        "Director of Planning, Research and Documentation": "dashboard_planning.html",
-        "Director of Finance": "dashboard_finance.html",
-        "Director of Environmental Management": "dashboard_environment.html",
-        "Director of Culture and Tourism": "dashboard_culture.html",
-        "Director of Sports": "dashboard_sports.html",
-        "Director of Public Affairs": "dashboard_public_affairs.html",
-        "State Coordinator": "dashboard_state.html",
-        "Admin": "admin_panel.html"
-      };
-      let redirectUrl = dashboardRoutes[role];
-      if (!redirectUrl && role.includes("Coordinator")) {
-        redirectUrl = dashboardRoutes["State Coordinator"];
-      }
-      if (redirectUrl) {
-        window.location.href = redirectUrl;
-      } else {
-        alert("Access denied: No dashboard assigned to this role.");
-      }
+      
+      // Redirect to dashboard
+      window.location.href = "dashboard.html";
+      
     } catch (error) {
-      alert("Login failed: " + error.message);
+      console.error("Login error:", error);
+      
+      // User-friendly error messages
+      let errorMessage = "Login failed. Please try again.";
+      switch (error.code) {
+        case "auth/user-not-found":
+          errorMessage = "User not found. Please sign up first.";
+          break;
+        case "auth/wrong-password":
+          errorMessage = "Incorrect password. Please try again.";
+          break;
+        case "auth/invalid-email":
+          errorMessage = "Invalid email format.";
+          break;
+        case "auth/too-many-requests":
+          errorMessage = "Too many attempts. Please try again later.";
+          break;
+        default:
+          if (error.message.includes("profile not found")) {
+            errorMessage = "User profile not found. Please contact support.";
+          }
+      }
+      
+      loginError.textContent = errorMessage;
+      loginError.style.display = "block";
+      
+    } finally {
+      // Reset button state
+      loginBtn.textContent = "Login";
+      loginBtn.disabled = false;
     }
   });
-</script>
+  </script>
 </body>
 </html>
