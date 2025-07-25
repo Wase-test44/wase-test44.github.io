@@ -32,19 +32,17 @@
         <input type="password" class="form-control" id="password" required />
       </div>
       <div class="mb-3">
-  <label class="form-label">Passkey</label>
-  <input type="password" class="form-control" id="passkeyInput" required />
-</div>
-
-       <button type="submit" class="btn btn-success w-100">Login</button>
+        <label class="form-label">Passkey</label>
+        <input type="password" class="form-control" id="passkeyInput" required />
+      </div>
+      <button type="submit" class="btn btn-success w-100">Login</button>
     </form>
   </div>
-
   <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js";
-  import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-auth.js";
-  import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore.js";
-
+  // Updated to use Firebase v11.9.1
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
+  import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
+  import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
   const firebaseConfig = {
     apiKey: "AIzaSyDWNLns4skz3zOyvYxIssiR0B3QSGN1li8",
     authDomain: "arewa-progressive-eagle.firebaseapp.com",
@@ -53,39 +51,31 @@
     messagingSenderId: "1002389077766",
     appId: "1:1002389077766:web:9af458f75b345588dea887"
   };
-
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
   const db = getFirestore(app);
-
   document.getElementById("loginForm").addEventListener("submit", async (e) => {
     e.preventDefault();
     const email = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value.trim();
     const passkeyInput = document.getElementById("passkeyInput").value.trim();
-
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
       const userDoc = await getDoc(doc(db, "official_profiles", user.uid));
-
       if (!userDoc.exists()) {
         alert("User profile not found.");
         return;
       }
-
       const role = userDoc.data().position;
       const normalizedRoleKey = role.toLowerCase().replace(/\s+/g, "_");
-
       const passkeyDoc = await getDoc(doc(db, "official_passkeys", normalizedRoleKey));
       if (!passkeyDoc.exists() || passkeyDoc.data().passkey !== passkeyInput) {
         alert("Invalid passkey for this position.");
         return;
       }
-
       // Save role locally for dashboard logic
       localStorage.setItem("position", role);
-
       const dashboardRoutes = {
         "Chairman": "dashboard_chairman.html",
         "Secretary": "dashboard_secretary.html",
@@ -98,24 +88,19 @@
         "State Coordinator": "dashboard_state.html",
         "Admin": "admin_panel.html"
       };
-
       let redirectUrl = dashboardRoutes[role];
-
-if (!redirectUrl && role.includes("Coordinator")) {
-  redirectUrl = dashboardRoutes["State Coordinator"];
-}
-
-if (redirectUrl) {
-  window.location.href = redirectUrl;
-} else {
-  alert("Access denied: No dashboard assigned to this role.");
-}
-
+      if (!redirectUrl && role.includes("Coordinator")) {
+        redirectUrl = dashboardRoutes["State Coordinator"];
+      }
+      if (redirectUrl) {
+        window.location.href = redirectUrl;
+      } else {
+        alert("Access denied: No dashboard assigned to this role.");
+      }
     } catch (error) {
       alert("Login failed: " + error.message);
     }
   });
 </script>
-
 </body>
 </html>
